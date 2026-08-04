@@ -8,7 +8,7 @@ export const LOGO_RENDER = {
 }
 
 /** Slightly smaller logo inside a taller, roomier header bar. */
-export const LOGO_HEADER_HEIGHT_CLASS = 'h-[1.75rem] md:h-[2rem]'
+export const LOGO_HEADER_HEIGHT_CLASS = 'h-[1.5rem] md:h-[1.7rem]'
 
 export const LOGO_FOOTER_HEIGHT_CLASS = 'h-14 md:h-16'
 
