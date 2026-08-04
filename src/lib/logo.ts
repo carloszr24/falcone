@@ -7,8 +7,8 @@ export const LOGO_RENDER = {
   height: 832,
 }
 
-/** Dominant logo that fills most of the tall header bar. */
-export const LOGO_HEADER_HEIGHT_CLASS = 'h-16 md:h-20'
+/** Logo sized to occupy most of the compact header bar. */
+export const LOGO_HEADER_HEIGHT_CLASS = 'h-[2.7rem] md:h-[3rem]'
 
 export const LOGO_FOOTER_HEIGHT_CLASS = 'h-14 md:h-16'
 
@@ -16,9 +16,9 @@ export const LOGO_IMAGE_CLASS = 'site-logo site-logo--header'
 
 export const LOGO_FOOTER_CLASS = 'site-logo site-logo--footer'
 
-/** Tall white header with vertical breathing room (~88px / ~104px). */
-export const HEADER_HEIGHT_CLASS = 'h-[5.5rem] md:h-[6.5rem]'
+/** Compact header (~78px / ~83px) so the logo has more presence. */
+export const HEADER_HEIGHT_CLASS = 'h-[4.9rem] md:h-[5.2rem]'
 
-export const HEADER_OFFSET_CLASS = 'pt-[5.5rem] md:pt-[6.5rem]'
+export const HEADER_OFFSET_CLASS = 'pt-[4.9rem] md:pt-[5.2rem]'
 
 export type LogoTone = 'light' | 'dark'

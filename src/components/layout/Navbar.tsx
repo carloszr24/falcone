@@ -17,7 +17,7 @@ const links = [
 ]
 
 const navLinkClass =
-  'inline-flex items-center leading-none text-[13px] font-normal uppercase tracking-[0.14em] text-slate-600 transition-colors duration-200'
+  'inline-flex items-center leading-none text-[15px] font-normal uppercase tracking-[0.11em] text-slate-600 transition-colors duration-200'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -51,14 +51,19 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/80 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto pl-5 pr-4 md:pl-12 md:pr-10">
-        <div className={cn('flex w-full items-center', HEADER_HEIGHT_CLASS)}>
+      <div className="max-w-[1380px] mx-auto px-8 lg:px-10">
+        <div
+          className={cn(
+            'flex w-full items-center translate-y-[2px]',
+            HEADER_HEIGHT_CLASS
+          )}
+        >
           <Link href="/" className="relative z-10 flex h-full shrink-0 items-center">
             <SiteLogo priority />
           </Link>
 
-          <div className="ml-auto hidden md:flex items-center gap-10 shrink-0 self-center">
-            <nav className="flex items-center gap-10">
+          <div className="ml-auto hidden md:flex items-center gap-8 shrink-0 self-center">
+            <nav className="flex items-center gap-8">
               {links.map((link) =>
                 link.href === '/sobre-nosotros' ? (
                   <div
@@ -154,7 +159,7 @@ export function Navbar() {
 
             <ValoracionGratuitaModal
               triggerLabel="Valoración gratuita"
-              triggerClassName="btn-primary inline-flex shrink-0 whitespace-nowrap rounded-full px-7 py-3.5 text-sm font-medium uppercase tracking-[0.1em]"
+              triggerClassName="btn-primary inline-flex shrink-0 whitespace-nowrap rounded-full px-7 py-3 text-sm font-medium uppercase tracking-[0.1em]"
             />
           </div>
 
