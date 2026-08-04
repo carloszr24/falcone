@@ -21,7 +21,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           ← Ver web
         </a>
       </header>
-      <div className="max-w-6xl mx-auto px-6 py-10">{children}</div>
+      <div className="mx-auto max-w-6xl px-6 py-10 lg:max-w-7xl">{children}</div>
     </div>
   )
 }
