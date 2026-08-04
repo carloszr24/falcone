@@ -132,8 +132,8 @@ export default function SobreNosotrosPage() {
             <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
               <div className="absolute left-1/2 top-[52%] h-[128%] w-[128%] -translate-x-1/2 -translate-y-1/2">
                 <Image
-                  src="/images/properties/piso-mar-rojo-tarifa/1.png"
-                  alt="Tarifa · Falcone Propiedades"
+                  src="/images/tarifa-sobre-nosotros.png"
+                  alt="Vista de Tarifa"
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 50vw"
