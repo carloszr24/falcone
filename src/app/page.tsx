@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { getFeaturedPropertiesForHome, getPublicProperties } from '@/lib/properties-store'
 import { toPropertyMapPoints } from '@/lib/property-map'
-import { ReviewsCarousel } from '@/components/home/ReviewsCarousel'
 import { FeaturedPropertiesGrid } from '@/components/home/FeaturedPropertiesGrid'
 import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { ScrollHint } from '@/components/home/ScrollHint'
@@ -125,8 +124,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      <ReviewsCarousel />
 
       <section className="py-24 px-6 md:px-10 max-w-7xl mx-auto">
         {featured.length > 0 ? (

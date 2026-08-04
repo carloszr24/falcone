@@ -19,7 +19,7 @@ export type LeadNotificationPayload = {
   observations?: string | null
 }
 
-const BRAND_BURGUNDY = '#0c5c6e'
+const BRAND_BURGUNDY = '#103f91'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://falconepropiedades.com'
 
 function escapeHtml(value: string): string {

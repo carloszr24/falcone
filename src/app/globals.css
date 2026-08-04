@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --brand-burgundy: #0c5c6e;
-  --brand-burgundy-light: #1a7a8f;
-  --brand-burgundy-dark: #084554;
+  --brand-burgundy: #103f91;
+  --brand-burgundy-light: #2b63c6;
+  --brand-burgundy-dark: #0a2d6a;
   --brand-white: #ffffff;
-  --brand-accent: #c45c26;
+  --brand-accent: #4f7fe0;
   --gold: var(--brand-burgundy);
   --gold-light: var(--brand-burgundy-light);
   --gold-dark: var(--brand-burgundy-dark);
@@ -25,8 +25,8 @@
     @apply font-sans font-normal text-ink;
     letter-spacing: 0.01em;
     background:
-      radial-gradient(1200px 600px at 10% -10%, rgba(26, 122, 143, 0.08), transparent 55%),
-      radial-gradient(900px 500px at 90% 0%, rgba(196, 92, 38, 0.06), transparent 50%),
+      radial-gradient(1200px 600px at 10% -10%, rgba(43, 99, 198, 0.1), transparent 55%),
+      radial-gradient(900px 500px at 90% 0%, rgba(79, 127, 224, 0.08), transparent 50%),
       var(--sand-50);
   }
 
