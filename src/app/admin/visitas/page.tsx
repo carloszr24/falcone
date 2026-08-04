@@ -33,15 +33,28 @@ function channelBadgeClass(channel: VisitChannel) {
 }
 
 export default function AdminVisitasPage() {
+  const [visits, setVisits] = useState(ADMIN_VISITS)
   const [query, setQuery] = useState('')
   const [channelFilter, setChannelFilter] = useState<'all' | VisitChannel>('all')
   const [propertyFilter, setPropertyFilter] = useState<'all' | string>('all')
   const [filtersOpen, setFiltersOpen] = useState(false)
+  const [formOpen, setFormOpen] = useState(true)
   const [expandedIds, setExpandedIds] = useState<string[]>([])
+  const [newVisit, setNewVisit] = useState({
+    propertyId: Object.keys(PROPERTY_LABELS)[0] ?? '',
+    contactName: '',
+    phone: '',
+    channel: 'llamada' as VisitChannel,
+    outcome: '',
+    occurredAt: new Date().toISOString().slice(0, 16),
+    summary: '',
+    notes: '',
+    nextAction: '',
+  })
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return ADMIN_VISITS.filter((visit) => {
+    return visits.filter((visit) => {
       if (channelFilter !== 'all' && visit.channel !== channelFilter) return false
       if (propertyFilter !== 'all' && visit.propertyId !== propertyFilter) return false
       if (!q) return true
@@ -58,26 +71,61 @@ export default function AdminVisitasPage() {
         .toLowerCase()
       return haystack.includes(q)
     }).sort((a, b) => new Date(b.occurredAt).getTime() - new Date(a.occurredAt).getTime())
-  }, [query, channelFilter, propertyFilter])
+  }, [visits, query, channelFilter, propertyFilter])
 
   const stats = useMemo(() => {
     const byProperty = Object.fromEntries(
-      Object.keys(PROPERTY_LABELS).map((id) => [id, ADMIN_VISITS.filter((v) => v.propertyId === id).length])
+      Object.keys(PROPERTY_LABELS).map((id) => [id, visits.filter((v) => v.propertyId === id).length])
     ) as Record<string, number>
     return {
-      total: ADMIN_VISITS.length,
-      llamadas: ADMIN_VISITS.filter((v) => v.channel === 'llamada').length,
-      visitas: ADMIN_VISITS.filter((v) => v.channel === 'visita_presencial').length,
-      interesadas: ADMIN_VISITS.filter((v) => v.channel === 'interesada').length,
+      total: visits.length,
+      llamadas: visits.filter((v) => v.channel === 'llamada').length,
+      visitas: visits.filter((v) => v.channel === 'visita_presencial').length,
+      interesadas: visits.filter((v) => v.channel === 'interesada').length,
       byProperty,
     }
-  }, [])
+  }, [visits])
 
   const activeFilterCount = [query.trim() !== '', channelFilter !== 'all', propertyFilter !== 'all'].filter(Boolean)
     .length
 
   function toggleExpanded(id: string) {
     setExpandedIds((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]))
+  }
+
+  function handleVisitChange<K extends keyof typeof newVisit>(field: K, value: (typeof newVisit)[K]) {
+    setNewVisit((current) => ({ ...current, [field]: value }))
+  }
+
+  function handleCreateVisit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const visit = {
+      id: `v${Date.now()}`,
+      propertyId: newVisit.propertyId,
+      contactName: newVisit.contactName.trim(),
+      phone: newVisit.phone.trim(),
+      channel: newVisit.channel,
+      summary: newVisit.summary.trim(),
+      notes: `${newVisit.outcome.trim() ? `Resultado: ${newVisit.outcome.trim()}\n\n` : ''}${newVisit.notes.trim()}`.trim(),
+      occurredAt: new Date(newVisit.occurredAt).toISOString(),
+      nextAction: newVisit.nextAction.trim(),
+    }
+
+    setVisits((current) => [visit, ...current])
+    setExpandedIds((current) => [visit.id, ...current.filter((item) => item !== visit.id)])
+    setNewVisit({
+      propertyId: Object.keys(PROPERTY_LABELS)[0] ?? '',
+      contactName: '',
+      phone: '',
+      channel: 'llamada',
+      outcome: '',
+      occurredAt: new Date().toISOString().slice(0, 16),
+      summary: '',
+      notes: '',
+      nextAction: '',
+    })
+    setFormOpen(false)
   }
 
   return (
@@ -89,6 +137,139 @@ export default function AdminVisitasPage() {
           seguimientos.
         </p>
       </div>
+
+      <section className="rounded-xl border border-stone-200 bg-white shadow-sm shadow-stone-100/40">
+        <div className="flex flex-col gap-3 border-b border-stone-100 px-4 py-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.16em] text-stone-400">Registro comercial</p>
+            <h2 className="mt-1 font-display text-xl font-light text-stone-900">Nueva visita / llamada</h2>
+            <p className="mt-1 text-sm font-light text-stone-500">
+              Añade nuevas interacciones y haz que aparezcan al momento en el histórico comercial.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setFormOpen((current) => !current)}
+            className="inline-flex items-center gap-2 self-start rounded-lg border border-stone-200 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-stone-600 transition hover:border-brand-burgundy/20 hover:text-brand-burgundy"
+          >
+            <span>{formOpen ? 'Ocultar formulario' : 'Abrir formulario'}</span>
+            <ChevronIcon open={formOpen} />
+          </button>
+        </div>
+
+        {formOpen && (
+          <form onSubmit={handleCreateVisit} className="grid gap-4 px-4 py-4">
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <Field>
+                <Label>Propiedad</Label>
+                <SelectInput
+                  value={newVisit.propertyId}
+                  onChange={(e) => handleVisitChange('propertyId', e.target.value)}
+                  required
+                >
+                  {Object.entries(PROPERTY_LABELS).map(([id, label]) => (
+                    <option key={id} value={id}>
+                      {label}
+                    </option>
+                  ))}
+                </SelectInput>
+              </Field>
+              <Field>
+                <Label>Nombre del contacto</Label>
+                <TextInput
+                  value={newVisit.contactName}
+                  onChange={(e) => handleVisitChange('contactName', e.target.value)}
+                  placeholder="Ej. Marta Ruiz"
+                  required
+                />
+              </Field>
+              <Field>
+                <Label>Teléfono</Label>
+                <TextInput
+                  value={newVisit.phone}
+                  onChange={(e) => handleVisitChange('phone', e.target.value)}
+                  placeholder="600 00 00 00"
+                  required
+                />
+              </Field>
+              <Field>
+                <Label>Canal / tipo</Label>
+                <SelectInput
+                  value={newVisit.channel}
+                  onChange={(e) => handleVisitChange('channel', e.target.value as VisitChannel)}
+                >
+                  {(Object.keys(VISIT_CHANNEL_LABELS) as VisitChannel[]).map((channel) => (
+                    <option key={channel} value={channel}>
+                      {VISIT_CHANNEL_LABELS[channel]}
+                    </option>
+                  ))}
+                </SelectInput>
+              </Field>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <Field>
+                <Label>Fecha</Label>
+                <TextInput
+                  type="datetime-local"
+                  value={newVisit.occurredAt}
+                  onChange={(e) => handleVisitChange('occurredAt', e.target.value)}
+                  required
+                />
+              </Field>
+              <Field>
+                <Label>Interés / estado</Label>
+                <TextInput
+                  value={newVisit.outcome}
+                  onChange={(e) => handleVisitChange('outcome', e.target.value)}
+                  placeholder="Muy interesado, pendiente, frío..."
+                  required
+                />
+              </Field>
+              <Field className="xl:col-span-2">
+                <Label>Siguiente paso</Label>
+                <TextInput
+                  value={newVisit.nextAction}
+                  onChange={(e) => handleVisitChange('nextAction', e.target.value)}
+                  placeholder="Llamar el jueves, enviar dossier, cerrar visita..."
+                  required
+                />
+              </Field>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <Field>
+                <Label>Resumen</Label>
+                <TextAreaInput
+                  value={newVisit.summary}
+                  onChange={(e) => handleVisitChange('summary', e.target.value)}
+                  placeholder="Qué ocurrió en la llamada, visita o seguimiento"
+                  required
+                />
+              </Field>
+              <Field>
+                <Label>Notas</Label>
+                <TextAreaInput
+                  value={newVisit.notes}
+                  onChange={(e) => handleVisitChange('notes', e.target.value)}
+                  placeholder="Objeciones, timing, info adicional, tareas internas..."
+                  required
+                />
+              </Field>
+            </div>
+
+            <div className="flex flex-col gap-2 border-t border-stone-100 pt-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-xs text-stone-400">Al guardar, la interacción se inserta arriba y entra en filtros y detalle.</p>
+              <button
+                type="submit"
+                className="inline-flex items-center justify-center rounded-lg bg-stone-900 px-4 py-2.5 text-xs uppercase tracking-[0.16em] text-white transition hover:bg-brand-burgundy"
+              >
+                Guardar interacción
+              </button>
+            </div>
+          </form>
+        )}
+      </section>
 
       <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatCard label="Total" value={String(stats.total)} />
@@ -129,7 +310,7 @@ export default function AdminVisitasPage() {
               <ChevronIcon open={filtersOpen} />
             </button>
             <p className="text-xs text-stone-400">
-              {filtered.length} de {ADMIN_VISITS.length} interacciones
+              {filtered.length} de {visits.length} interacciones
             </p>
           </div>
         </div>
@@ -231,6 +412,56 @@ export default function AdminVisitasPage() {
         )}
       </div>
     </div>
+  )
+}
+
+function Field({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return <label className={cn('grid gap-1.5', className)}>{children}</label>
+}
+
+function Label({ children }: { children: React.ReactNode }) {
+  return <span className="text-[10px] uppercase tracking-[0.16em] text-stone-500">{children}</span>
+}
+
+function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <input
+      {...props}
+      className={cn(
+        'w-full rounded-lg border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm font-light text-stone-700 transition placeholder:text-stone-400 focus:border-brand-burgundy focus:bg-white focus:outline-none',
+        props.className
+      )}
+    />
+  )
+}
+
+function SelectInput(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
+  return (
+    <select
+      {...props}
+      className={cn(
+        'w-full rounded-lg border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm font-light text-stone-700 transition focus:border-brand-burgundy focus:bg-white focus:outline-none',
+        props.className
+      )}
+    />
+  )
+}
+
+function TextAreaInput(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return (
+    <textarea
+      {...props}
+      className={cn(
+        'min-h-[104px] w-full rounded-lg border border-stone-200 bg-stone-50 px-3 py-2.5 text-sm font-light text-stone-700 transition placeholder:text-stone-400 focus:border-brand-burgundy focus:bg-white focus:outline-none',
+        props.className
+      )}
+    />
   )
 }
 
