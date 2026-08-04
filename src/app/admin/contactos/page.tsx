@@ -1,6 +1,7 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   ADMIN_CONTACTS,
   CONTACT_PROFILE_LABELS,
@@ -34,7 +35,8 @@ export default function AdminContactosPage() {
   const [zoneFilter, setZoneFilter] = useState('all')
   const [propertyFilter, setPropertyFilter] = useState<'all' | 'linked' | 'none' | string>('all')
   const [filtersOpen, setFiltersOpen] = useState(false)
-  const [formOpen, setFormOpen] = useState(true)
+  const [formOpen, setFormOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const [expandedIds, setExpandedIds] = useState<string[]>([])
   const [newContact, setNewContact] = useState({
     fullName: '',
@@ -105,6 +107,24 @@ export default function AdminContactosPage() {
     propertyFilter !== 'all',
   ].filter(Boolean).length
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!formOpen) return
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setFormOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = originalOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [formOpen])
+
   function toggleExpanded(id: string) {
     setExpandedIds((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]))
   }
@@ -152,174 +172,183 @@ export default function AdminContactosPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="font-display text-3xl font-light text-stone-900">Contactos</h1>
-        <p className="mt-1 max-w-2xl text-sm text-stone-500">
-          Base de potenciales clientes (próximos o futuros): perfil, zona, presupuesto y propiedad de interés.
-          Pensado para volcar y enriquecer vuestra propia agenda comercial.
-        </p>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h1 className="font-display text-3xl font-light text-stone-900">Contactos</h1>
+          <p className="mt-1 max-w-2xl text-sm text-stone-500">
+            Base de potenciales clientes (próximos o futuros): perfil, zona, presupuesto y propiedad de interés.
+            Pensado para volcar y enriquecer vuestra propia agenda comercial.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => setFormOpen(true)}
+          className="inline-flex items-center gap-2 self-start rounded-lg border border-stone-200 bg-white px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-stone-700 shadow-sm shadow-stone-100/40 transition hover:border-brand-burgundy/20 hover:text-brand-burgundy"
+        >
+          <PlusIcon />
+          <span>Nuevo contacto</span>
+        </button>
       </div>
 
-      <section className="rounded-xl border border-stone-200 bg-white shadow-sm shadow-stone-100/40">
-        <div className="flex flex-col gap-3 border-b border-stone-100 px-4 py-4 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.16em] text-stone-400">Alta rápida CRM</p>
-            <h2 className="mt-1 font-display text-xl font-light text-stone-900">Nuevo contacto</h2>
+      {mounted &&
+        formOpen &&
+        createPortal(
+          <AdminModal onClose={() => setFormOpen(false)} title="Nuevo contacto" eyebrow="Alta rápida CRM">
             <p className="mt-1 text-sm font-light text-stone-500">
               Registra nuevos leads con el mismo nivel de detalle que las fichas de ejemplo.
             </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => setFormOpen((current) => !current)}
-            className="inline-flex items-center gap-2 self-start rounded-lg border border-stone-200 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-stone-600 transition hover:border-brand-burgundy/20 hover:text-brand-burgundy"
-          >
-            <span>{formOpen ? 'Ocultar formulario' : 'Abrir formulario'}</span>
-            <ChevronIcon open={formOpen} />
-          </button>
-        </div>
-
-        {formOpen && (
-          <form onSubmit={handleCreateContact} className="grid gap-4 px-4 py-4">
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              <Field>
-                <Label>Nombre completo</Label>
-                <TextInput
-                  value={newContact.fullName}
-                  onChange={(e) => handleContactChange('fullName', e.target.value)}
-                  placeholder="Ej. Marta Ruiz"
-                  required
-                />
-              </Field>
-              <Field>
-                <Label>Edad</Label>
-                <TextInput
-                  type="number"
-                  min="18"
-                  max="99"
-                  value={newContact.age}
-                  onChange={(e) => handleContactChange('age', e.target.value)}
-                  placeholder="42"
-                  required
-                />
-              </Field>
-              <Field>
-                <Label>Teléfono</Label>
-                <TextInput
-                  value={newContact.phone}
-                  onChange={(e) => handleContactChange('phone', e.target.value)}
-                  placeholder="600 00 00 00"
-                  required
-                />
-              </Field>
-              <Field>
-                <Label>Email</Label>
-                <TextInput
-                  type="email"
-                  value={newContact.email}
-                  onChange={(e) => handleContactChange('email', e.target.value)}
-                  placeholder="cliente@email.com"
-                  required
-                />
-              </Field>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              <Field>
-                <Label>Perfil buscado</Label>
-                <SelectInput
-                  value={newContact.profile}
-                  onChange={(e) => handleContactChange('profile', e.target.value as ContactProfile)}
-                >
-                  {(Object.keys(CONTACT_PROFILE_LABELS) as ContactProfile[]).map((profile) => (
-                    <option key={profile} value={profile}>
-                      {CONTACT_PROFILE_LABELS[profile]}
-                    </option>
-                  ))}
-                </SelectInput>
-              </Field>
-              <Field>
-                <Label>Zona preferida</Label>
-                <TextInput
-                  value={newContact.zone}
-                  onChange={(e) => handleContactChange('zone', e.target.value)}
-                  placeholder="Los Lances / centro"
-                  required
-                />
-              </Field>
-              <Field>
-                <Label>Presupuesto</Label>
-                <TextInput
-                  value={newContact.budgetLabel}
-                  onChange={(e) => handleContactChange('budgetLabel', e.target.value)}
-                  placeholder="320–380.000 €"
-                  required
-                />
-              </Field>
-              <Field>
-                <Label>Etapa / estado</Label>
-                <SelectInput
-                  value={newContact.stage}
-                  onChange={(e) => handleContactChange('stage', e.target.value as ContactStage)}
-                >
-                  {(Object.keys(CONTACT_STAGE_LABELS) as ContactStage[]).map((stage) => (
-                    <option key={stage} value={stage}>
-                      {CONTACT_STAGE_LABELS[stage]}
-                    </option>
-                  ))}
-                </SelectInput>
-              </Field>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              <Field>
-                <Label>Llamó para...</Label>
-                <TextAreaInput
-                  value={newContact.calledFor}
-                  onChange={(e) => handleContactChange('calledFor', e.target.value)}
-                  placeholder="Qué busca, contexto de la llamada o motivación principal"
-                  required
-                />
-              </Field>
-              <div className="grid gap-4">
+            <form onSubmit={handleCreateContact} className="mt-5 grid gap-4">
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 <Field>
-                  <Label>Propiedad relacionada</Label>
+                  <Label>Nombre completo</Label>
+                  <TextInput
+                    value={newContact.fullName}
+                    onChange={(e) => handleContactChange('fullName', e.target.value)}
+                    placeholder="Ej. Marta Ruiz"
+                    required
+                  />
+                </Field>
+                <Field>
+                  <Label>Edad</Label>
+                  <TextInput
+                    type="number"
+                    min="18"
+                    max="99"
+                    value={newContact.age}
+                    onChange={(e) => handleContactChange('age', e.target.value)}
+                    placeholder="42"
+                    required
+                  />
+                </Field>
+                <Field>
+                  <Label>Teléfono</Label>
+                  <TextInput
+                    value={newContact.phone}
+                    onChange={(e) => handleContactChange('phone', e.target.value)}
+                    placeholder="600 00 00 00"
+                    required
+                  />
+                </Field>
+                <Field>
+                  <Label>Email</Label>
+                  <TextInput
+                    type="email"
+                    value={newContact.email}
+                    onChange={(e) => handleContactChange('email', e.target.value)}
+                    placeholder="cliente@email.com"
+                    required
+                  />
+                </Field>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                <Field>
+                  <Label>Perfil buscado</Label>
                   <SelectInput
-                    value={newContact.propertyId}
-                    onChange={(e) => handleContactChange('propertyId', e.target.value)}
+                    value={newContact.profile}
+                    onChange={(e) => handleContactChange('profile', e.target.value as ContactProfile)}
                   >
-                    <option value="none">Sin vincular</option>
-                    {Object.entries(PROPERTY_LABELS).map(([id, label]) => (
-                      <option key={id} value={id}>
-                        {label}
+                    {(Object.keys(CONTACT_PROFILE_LABELS) as ContactProfile[]).map((profile) => (
+                      <option key={profile} value={profile}>
+                        {CONTACT_PROFILE_LABELS[profile]}
                       </option>
                     ))}
                   </SelectInput>
                 </Field>
                 <Field>
-                  <Label>Notas</Label>
-                  <TextAreaInput
-                    value={newContact.notes}
-                    onChange={(e) => handleContactChange('notes', e.target.value)}
-                    placeholder="Detalles relevantes, timing, objeciones, siguientes pasos..."
+                  <Label>Zona preferida</Label>
+                  <TextInput
+                    value={newContact.zone}
+                    onChange={(e) => handleContactChange('zone', e.target.value)}
+                    placeholder="Los Lances / centro"
                     required
                   />
                 </Field>
+                <Field>
+                  <Label>Presupuesto</Label>
+                  <TextInput
+                    value={newContact.budgetLabel}
+                    onChange={(e) => handleContactChange('budgetLabel', e.target.value)}
+                    placeholder="320–380.000 €"
+                    required
+                  />
+                </Field>
+                <Field>
+                  <Label>Etapa / estado</Label>
+                  <SelectInput
+                    value={newContact.stage}
+                    onChange={(e) => handleContactChange('stage', e.target.value as ContactStage)}
+                  >
+                    {(Object.keys(CONTACT_STAGE_LABELS) as ContactStage[]).map((stage) => (
+                      <option key={stage} value={stage}>
+                        {CONTACT_STAGE_LABELS[stage]}
+                      </option>
+                    ))}
+                  </SelectInput>
+                </Field>
               </div>
-            </div>
 
-            <div className="flex flex-col gap-2 border-t border-stone-100 pt-4 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-xs text-stone-400">Al guardar, el contacto se añade arriba del listado y queda listo para filtrar.</p>
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center rounded-lg bg-stone-900 px-4 py-2.5 text-xs uppercase tracking-[0.16em] text-white transition hover:bg-brand-burgundy"
-              >
-                Guardar contacto
-              </button>
-            </div>
-          </form>
+              <div className="grid gap-4 md:grid-cols-2">
+                <Field>
+                  <Label>Llamó para...</Label>
+                  <TextAreaInput
+                    value={newContact.calledFor}
+                    onChange={(e) => handleContactChange('calledFor', e.target.value)}
+                    placeholder="Qué busca, contexto de la llamada o motivación principal"
+                    required
+                  />
+                </Field>
+                <div className="grid gap-4">
+                  <Field>
+                    <Label>Propiedad relacionada</Label>
+                    <SelectInput
+                      value={newContact.propertyId}
+                      onChange={(e) => handleContactChange('propertyId', e.target.value)}
+                    >
+                      <option value="none">Sin vincular</option>
+                      {Object.entries(PROPERTY_LABELS).map(([id, label]) => (
+                        <option key={id} value={id}>
+                          {label}
+                        </option>
+                      ))}
+                    </SelectInput>
+                  </Field>
+                  <Field>
+                    <Label>Notas</Label>
+                    <TextAreaInput
+                      value={newContact.notes}
+                      onChange={(e) => handleContactChange('notes', e.target.value)}
+                      placeholder="Detalles relevantes, timing, objeciones, siguientes pasos..."
+                      required
+                    />
+                  </Field>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2 border-t border-stone-100 pt-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-xs text-stone-400">
+                  Al guardar, el contacto se añade arriba del listado y queda listo para filtrar.
+                </p>
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <button
+                    type="button"
+                    onClick={() => setFormOpen(false)}
+                    className="inline-flex items-center justify-center rounded-lg border border-stone-200 px-4 py-2.5 text-xs uppercase tracking-[0.16em] text-stone-600 transition hover:border-stone-300 hover:text-stone-900"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center rounded-lg bg-stone-900 px-4 py-2.5 text-xs uppercase tracking-[0.16em] text-white transition hover:bg-brand-burgundy"
+                  >
+                    Guardar contacto
+                  </button>
+                </div>
+              </div>
+            </form>
+          </AdminModal>,
+          document.body
         )}
-      </section>
 
       <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatCard label="Total" value={String(stats.total)} />
@@ -627,6 +656,51 @@ function DetailBlock({ label, children }: { label: string; children: React.React
       <p className="text-[10px] uppercase tracking-[0.16em] text-stone-400">{label}</p>
       <p className="mt-1.5 text-sm font-light leading-6 text-stone-700">{children}</p>
     </div>
+  )
+}
+
+function AdminModal({
+  title,
+  eyebrow,
+  onClose,
+  children,
+}: {
+  title: string
+  eyebrow: string
+  onClose: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4 py-6 backdrop-blur-[2px]" onClick={onClose}>
+      <div
+        className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-2xl border border-stone-200 bg-white p-5 shadow-2xl shadow-stone-900/10 sm:p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4 border-b border-stone-100 pb-4">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.16em] text-stone-400">{eyebrow}</p>
+            <h2 className="mt-1 font-display text-2xl font-light text-stone-900">{title}</h2>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Cerrar modal"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 text-lg text-stone-500 transition hover:border-brand-burgundy/20 hover:text-brand-burgundy"
+          >
+            ×
+          </button>
+        </div>
+        {children}
+      </div>
+    </div>
+  )
+}
+
+function PlusIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true" className="h-3.5 w-3.5" fill="none">
+      <path d="M8 3.25v9.5M3.25 8h9.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   )
 }
 
