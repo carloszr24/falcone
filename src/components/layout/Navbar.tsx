@@ -17,7 +17,7 @@ const links = [
 ]
 
 const navLinkClass =
-  'inline-flex items-center leading-none text-[15px] font-normal uppercase tracking-[0.11em] text-slate-600 transition-colors duration-200'
+  'inline-flex items-center leading-none text-xs font-normal uppercase tracking-[0.1em] text-slate-600 transition-colors duration-200'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -54,7 +54,7 @@ export function Navbar() {
       <div className="max-w-[1380px] mx-auto px-8 lg:px-10">
         <div
           className={cn(
-            'flex w-full items-center translate-y-[2px]',
+            'flex w-full items-center',
             HEADER_HEIGHT_CLASS
           )}
         >
@@ -62,8 +62,8 @@ export function Navbar() {
             <SiteLogo priority />
           </Link>
 
-          <div className="ml-auto hidden md:flex items-center gap-8 shrink-0 self-center">
-            <nav className="flex items-center gap-8">
+          <div className="ml-auto hidden md:flex items-center gap-6 shrink-0 self-center lg:gap-8">
+            <nav className="flex items-center gap-6 lg:gap-8">
               {links.map((link) =>
                 link.href === '/sobre-nosotros' ? (
                   <div
@@ -87,7 +87,7 @@ export function Navbar() {
                         viewBox="0 0 20 20"
                         aria-hidden="true"
                         className={cn(
-                          'h-3.5 w-3.5 shrink-0 transition-transform duration-200',
+                          'h-3 w-3 shrink-0 transition-transform duration-200',
                           servicesOpen && 'rotate-180'
                         )}
                       >
@@ -159,7 +159,7 @@ export function Navbar() {
 
             <ValoracionGratuitaModal
               triggerLabel="Valoración gratuita"
-              triggerClassName="btn-primary inline-flex shrink-0 whitespace-nowrap rounded-full px-7 py-3 text-sm font-medium uppercase tracking-[0.1em]"
+              triggerClassName="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-brand-burgundy px-5 py-2 text-xs font-medium uppercase tracking-[0.1em] text-white shadow-soft transition-colors duration-200 hover:bg-brand-burgundy-dark"
             />
           </div>
 
