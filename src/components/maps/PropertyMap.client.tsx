@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css'
 import { cn } from '@/lib/utils'
 import { formatPrice } from '@/lib/utils'
 import {
-  CORIA_DEL_RIO_CENTER,
+  TARIFA_CENTER,
   DEFAULT_MAP_ZOOM,
   MAP_TILE_ATTRIBUTION,
   MAP_TILE_URL,
@@ -72,7 +72,7 @@ export default function PropertyMap({ points = [], className, draggable = null, 
       scrollWheelZoom: false,
       zoomControl: true,
       attributionControl: true,
-    }).setView(CORIA_DEL_RIO_CENTER, DEFAULT_MAP_ZOOM)
+    }).setView(TARIFA_CENTER, DEFAULT_MAP_ZOOM)
 
     map.zoomControl.setPosition('topright')
 
@@ -119,7 +119,7 @@ export default function PropertyMap({ points = [], className, draggable = null, 
     }
 
     if (points.length === 0) {
-      map.setView(CORIA_DEL_RIO_CENTER, DEFAULT_MAP_ZOOM, { animate: false })
+      map.setView(TARIFA_CENTER, DEFAULT_MAP_ZOOM, { animate: false })
       return
     }
 

@@ -21,7 +21,7 @@ export function HeroActions({ mapPoints }: Props) {
       />
       <ValoracionGratuitaModal
         triggerLabel="Deseo vender"
-        triggerClassName="inline-flex w-full sm:flex-1 sm:min-w-0 min-h-[3rem] md:min-h-[3.1rem] items-center justify-center px-8 py-3.5 text-xs md:text-sm tracking-[0.06em] uppercase font-light border border-white/80 text-white box-border hover:bg-white hover:text-brand-burgundy transition-colors duration-200"
+        triggerClassName="inline-flex w-full sm:flex-1 sm:min-w-0 min-h-[3rem] md:min-h-[3.1rem] items-center justify-center rounded-full px-8 py-3.5 text-xs md:text-sm tracking-[0.04em] font-medium border border-white/80 text-white box-border backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-brand-burgundy hover:-translate-y-0.5 hover:shadow-soft"
       />
     </div>
   )

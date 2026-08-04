@@ -6,16 +6,16 @@ export function HeroCarousel() {
   return (
     <div className="absolute inset-0 z-0">
       <Image
-        src="/images/coria.jpg"
-        alt="Coria del Río, Sevilla"
+        src="/images/properties/piso-mar-rojo-tarifa/1.png"
+        alt="Tarifa, Cádiz"
         fill
         priority
         quality={80}
         sizes="100vw"
-        className="object-cover brightness-[0.88] saturate-[0.9]"
+        className="object-cover brightness-[0.88] saturate-[0.95]"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-br from-brand-burgundy-dark/30 via-stone-900/20 to-brand-burgundy/20"
+        className="absolute inset-0 bg-gradient-to-br from-brand-burgundy-dark/45 via-ink/25 to-brand-accent/20"
         aria-hidden="true"
       />
     </div>

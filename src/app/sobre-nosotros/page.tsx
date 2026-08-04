@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { LEGAL } from '@/lib/contact'
 import {
   HOME_EXTRA_SERVICES,
   PARTNER_SERVICES,
@@ -133,8 +132,8 @@ export default function SobreNosotrosPage() {
             <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
               <div className="absolute left-1/2 top-[52%] h-[128%] w-[128%] -translate-x-1/2 -translate-y-1/2">
                 <Image
-                  src="/images/julio.jpg"
-                  alt={LEGAL.ownerName}
+                  src="/images/properties/piso-mar-rojo-tarifa/1.png"
+                  alt="Tarifa · Falcone Propiedades"
                   fill
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -158,9 +157,9 @@ export default function SobreNosotrosPage() {
                   en notaría: escuchamos, informamos y actuamos con la máxima diligencia.
                 </p>
                 <p>
-                  Somos un equipo especializado en el mercado residencial de Coria del Río, el Aljarafe y la
-                  provincia de Sevilla. Conocemos la zona, sus barrios y las particularidades de cada
-                  operación, y ponemos ese conocimiento al servicio de quien confía en nosotros.
+                  Somos un equipo especializado en el mercado residencial de Tarifa y la costa de Cádiz.
+                  Conocemos la zona, sus barrios y las particularidades de cada operación, y ponemos ese
+                  conocimiento al servicio de quien confía en nosotros.
                 </p>
               </div>
             </div>

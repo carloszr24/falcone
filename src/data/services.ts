@@ -65,7 +65,7 @@ export const HOME_EXTRA_SERVICES: ServiceItem[] = [
 export const SERVICE_ITEMS: ServiceItem[] = [
   {
     title: 'Compra y venta',
-    desc: 'Acompañamiento integral en operaciones de compraventa en Coria del Río, el Aljarafe y provincia de Sevilla.',
+    desc: 'Acompañamiento integral en operaciones de compraventa en Tarifa y la costa de Cádiz.',
   },
   ...PRIMARY_SERVICES,
   {

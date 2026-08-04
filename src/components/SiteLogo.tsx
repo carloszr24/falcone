@@ -7,7 +7,6 @@ import {
   LOGO_IMAGE_CLASS,
   LOGO_RENDER,
   LOGO_SRC,
-  LOGO_WHITE_SRC,
   type LogoTone,
 } from '@/lib/logo'
 import { AGENT } from '@/lib/contact'
@@ -15,40 +14,27 @@ import { AGENT } from '@/lib/contact'
 type Props = {
   className?: string
   variant?: 'header' | 'footer'
+  /** Kept for Navbar API compatibility; logo always sits on a white plate. */
   tone?: LogoTone
   priority?: boolean
 }
 
-export function SiteLogo({ className, variant = 'header', tone = 'dark', priority = false }: Props) {
+export function SiteLogo({ className, variant = 'header', priority = false }: Props) {
   const isFooter = variant === 'footer'
-  const resolvedTone = isFooter ? 'dark' : tone
   const imageClass = isFooter ? LOGO_FOOTER_CLASS : LOGO_IMAGE_CLASS
-  const sizes = isFooter ? '220px' : '(max-width: 768px) 180px, 220px'
+  const sizes = isFooter ? '180px' : '(max-width: 768px) 140px, 180px'
 
   return (
     <span
       role="img"
       aria-label={AGENT.name}
       className={cn(
-        'relative inline-flex shrink-0 items-center',
+        'relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-black/5',
+        'px-2.5 py-1.5',
         isFooter ? LOGO_FOOTER_HEIGHT_CLASS : LOGO_HEADER_HEIGHT_CLASS,
         className
       )}
     >
-      <Image
-        src={LOGO_WHITE_SRC}
-        alt=""
-        aria-hidden
-        width={LOGO_RENDER.width}
-        height={LOGO_RENDER.height}
-        sizes={sizes}
-        priority={priority}
-        className={cn(
-          imageClass,
-          'site-logo--swap transition-opacity duration-300 ease-in-out',
-          resolvedTone === 'light' ? 'opacity-100' : 'opacity-0'
-        )}
-      />
       <Image
         src={LOGO_SRC}
         alt=""
@@ -57,11 +43,7 @@ export function SiteLogo({ className, variant = 'header', tone = 'dark', priorit
         height={LOGO_RENDER.height}
         sizes={sizes}
         priority={priority}
-        className={cn(
-          imageClass,
-          'site-logo--swap site-logo--swap-dark absolute inset-0 transition-opacity duration-300 ease-in-out',
-          resolvedTone === 'dark' ? 'opacity-100' : 'opacity-0'
-        )}
+        className={cn(imageClass, 'bg-white')}
       />
     </span>
   )

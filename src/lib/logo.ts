@@ -1,15 +1,15 @@
-export const LOGO_SRC = '/images/julio-puig.png'
-export const LOGO_WHITE_SRC = '/images/julio-puig-blanco.png'
+export const LOGO_SRC = '/images/falcone.png'
+export const LOGO_WHITE_SRC = '/images/falcone.png'
 
-/** Intrinsic dimensions — same aspect ratio for both logo variants. */
+/** Intrinsic dimensions — falcone.png (square). */
 export const LOGO_RENDER = {
-  width: 4916,
-  height: 3125,
+  width: 1024,
+  height: 1024,
 }
 
-export const LOGO_HEADER_HEIGHT_CLASS = 'h-14 md:h-[4.25rem]'
+export const LOGO_HEADER_HEIGHT_CLASS = 'h-12 md:h-14'
 
-export const LOGO_FOOTER_HEIGHT_CLASS = 'h-16 md:h-[4.75rem]'
+export const LOGO_FOOTER_HEIGHT_CLASS = 'h-14 md:h-16'
 
 export const LOGO_IMAGE_CLASS = 'site-logo site-logo--header'
 

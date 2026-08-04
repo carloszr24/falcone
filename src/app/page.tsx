@@ -66,13 +66,13 @@ export default async function HomePage() {
               Compre o venda su vivienda
               <span className="hidden md:inline"> </span>
               <br className="md:hidden" aria-hidden="true" />
-              con la <span className="text-rose-100/95 italic">tranquilidad</span> que merece
+              en <span className="text-sand-100 italic">Tarifa</span> con la tranquilidad que merece
             </h1>
             <p
-              className="text-stone-200/95 text-base sm:text-lg font-light max-w-[min(100%,24rem)] sm:max-w-xl mx-auto mb-9 leading-relaxed text-pretty animate-fade-up"
+              className="text-stone-200/95 text-base sm:text-lg font-normal max-w-[min(100%,24rem)] sm:max-w-xl mx-auto mb-9 leading-relaxed text-pretty animate-fade-up"
               style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}
             >
-              Le acompañamos en cada paso con un servicio personalizado y adaptado a sus necesidades.
+              Falcone Propiedades: acompañamiento cercano en compra y venta cerca del mar.
             </p>
             <HeroActions mapPoints={mapPoints} />
           </div>
@@ -88,7 +88,7 @@ export default async function HomePage() {
               Todo lo que necesita para operar con confianza
             </h2>
             <p className="mt-4 text-sm text-stone-200/80 max-w-2xl mx-auto leading-relaxed font-light">
-              Nuestra oficina se encuentra en Coria del Río, Sevilla.
+              Nuestra oficina se encuentra en Tarifa, Cádiz.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

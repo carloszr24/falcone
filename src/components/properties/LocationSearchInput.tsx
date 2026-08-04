@@ -24,7 +24,7 @@ export function LocationSearchInput({
   value,
   onChange,
   onSelect,
-  placeholder = 'Ej: Puente Rojo, Coria del Río',
+  placeholder = 'Ej: Calle Trafalgar, Tarifa',
   className,
 }: Props) {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([])

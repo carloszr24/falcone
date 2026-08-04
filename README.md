@@ -1,6 +1,8 @@
-# Julio Puig Real Estate — Web
+# Falcone Propiedades — Web
 
 Next.js + TypeScript + Tailwind. **Datos locales** en `data/properties.json` y `data/leads.json` (sin base de datos externa).
+
+Inmobiliaria en Tarifa (Cádiz).
 
 ---
 

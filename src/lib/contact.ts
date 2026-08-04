@@ -1,38 +1,38 @@
-export const CONTACT_EMAIL = ''
+export const CONTACT_EMAIL = 'correo@falconepropiedades.com'
 
 export const AGENT = {
-  name: 'Julio Puig',
+  name: 'Falcone Propiedades',
   title: 'Agencia inmobiliaria',
   tagline:
-    'Experiencia y dedicación en compra, venta y alquiler con un trato personalizado y profesional.',
+    'Inmobiliaria en Tarifa. Te acompañamos en la compra y venta de tu vivienda con trato cercano y profesional.',
 } as const
 
 export const LEGAL = {
-  ownerName: 'Julio Puig',
+  ownerName: 'Falcone Propiedades',
   legalForm: 'autónomo',
   taxId: '',
-  address: 'C. Cervantes, 70, 41100 Coria del Río, Sevilla',
+  address: 'Urb. El Acebuche 8, 11380 Tarifa, Cádiz',
 } as const
 
 export const OFFICES = {
   primary: {
     label: 'Oficina',
-    line1: 'C. Cervantes, 70',
-    line2: '41100 Coria del Río, Sevilla',
-    full: 'C. Cervantes, 70, 41100 Coria del Río, Sevilla',
-    mapsQuery: 'Calle+Cervantes+70,+41100+Coria+del+Rio,+Sevilla',
+    line1: 'Urb. El Acebuche 8',
+    line2: '11380 Tarifa, Cádiz',
+    full: 'Urb. El Acebuche 8, 11380 Tarifa, Cádiz',
+    mapsQuery: 'Urb+El+Acebuche+8,+11380+Tarifa,+Cadiz',
   },
 } as const
 
 export const BUSINESS_HOURS = {
   label: 'Horario de atención',
   schedule: [
-    { day: 'Lunes', hours: '9:00 – 20:30' },
+    { day: 'Lunes', hours: '9:00 – 20:00' },
     { day: 'Martes', hours: '9:00 – 20:00' },
     { day: 'Miércoles', hours: '9:00 – 20:00' },
     { day: 'Jueves', hours: '9:00 – 20:00' },
     { day: 'Viernes', hours: '9:00 – 20:00' },
-    { day: 'Sábado', hours: 'Cerrado' },
+    { day: 'Sábado', hours: 'Consultar' },
     { day: 'Domingo', hours: 'Cerrado' },
   ],
 } as const
@@ -43,9 +43,9 @@ export const CONTACT = {
   address: OFFICES.primary,
   offices: OFFICES,
   phone: {
-    display: '633 71 77 14',
-    e164: '+34633717714',
-    wa: '34633717714',
+    display: '627 13 63 16',
+    e164: '+34627136316',
+    wa: '34627136316',
     label: 'Teléfono',
   },
   email: contactEmail,

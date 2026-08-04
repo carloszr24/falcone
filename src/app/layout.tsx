@@ -1,27 +1,27 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Source_Sans_3 } from 'next/font/google'
+import { Fraunces, Manrope } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 
-const sans = Source_Sans_3({
+const sans = Manrope({
   subsets: ['latin'],
   variable: '--font-body',
-  weight: ['300', '400', '500'],
+  weight: ['400', '500', '600', '700'],
 })
 
-const display = Cormorant_Garamond({
+const display = Fraunces({
   subsets: ['latin'],
   variable: '--font-display',
-  weight: ['300', '400', '500'],
+  weight: ['400', '500', '600'],
 })
 
 export const metadata: Metadata = {
-  title: 'Julio Puig | Agencia inmobiliaria',
+  title: 'Falcone Propiedades | Inmobiliaria en Tarifa',
   description:
-    'Compra, venta y alquiler en Coria del Río y provincia de Sevilla. Servicio personalizado y asesoramiento integral.',
+    'Compra y venta de viviendas en Tarifa y Cádiz. Falcone Propiedades: trato cercano, asesoramiento claro y propiedades cerca del mar.',
   keywords:
-    'julio puig, inmobiliaria coria del rio, inmobiliaria sevilla, agencia inmobiliaria, compra vivienda, venta vivienda, alquiler',
+    'falcone propiedades, inmobiliaria tarifa, comprar piso tarifa, venta vivienda cadiz, playa de los lances, agencia inmobiliaria tarifa',
 }
 
 export default function RootLayout({
@@ -31,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${sans.variable} ${display.variable}`}>
-      <body className="bg-white text-stone-900 antialiased">
+      <body className="bg-sand-50 text-ink antialiased">
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
