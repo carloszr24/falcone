@@ -51,7 +51,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative h-svh min-h-[32rem] flex flex-col items-center justify-center overflow-hidden pt-[5.5rem] pb-8 md:pt-28 md:pb-10">
+      <section className="relative h-svh min-h-[32rem] flex flex-col items-center justify-center overflow-hidden pt-16 pb-8 md:pt-20 md:pb-10">
         <div className="absolute inset-0">
           <HeroCarousel />
           <div className="absolute inset-0 bg-gradient-to-b from-stone-900/40 via-brand-burgundy-dark/30 to-stone-950/55" />

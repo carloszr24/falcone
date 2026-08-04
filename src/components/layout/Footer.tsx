@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import {
   AGENT,
-  BUSINESS_HOURS,
   CONTACT,
   OFFICES,
   emailHref,
@@ -60,17 +59,6 @@ export function Footer() {
                 <a href={mapsHref} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-stone-900">
                   {OFFICES.primary.full}
                 </a>
-              </li>
-              <li className="pt-2">
-                <p className="text-stone-400 text-xs mb-1 font-light">{BUSINESS_HOURS.label}</p>
-                <ul className="space-y-0.5 text-xs text-stone-500">
-                  {BUSINESS_HOURS.schedule.map((row) => (
-                    <li key={row.day} className="flex justify-between gap-4 max-w-[14rem]">
-                      <span>{row.day}</span>
-                      <span className={row.hours === 'Cerrado' ? 'text-stone-400' : ''}>{row.hours}</span>
-                    </li>
-                  ))}
-                </ul>
               </li>
             </ul>
           </div>

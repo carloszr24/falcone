@@ -24,19 +24,6 @@ export const OFFICES = {
   },
 } as const
 
-export const BUSINESS_HOURS = {
-  label: 'Horario de atención',
-  schedule: [
-    { day: 'Lunes', hours: '9:00 – 20:00' },
-    { day: 'Martes', hours: '9:00 – 20:00' },
-    { day: 'Miércoles', hours: '9:00 – 20:00' },
-    { day: 'Jueves', hours: '9:00 – 20:00' },
-    { day: 'Viernes', hours: '9:00 – 20:00' },
-    { day: 'Sábado', hours: 'Consultar' },
-    { day: 'Domingo', hours: 'Cerrado' },
-  ],
-} as const
-
 const contactEmail = (process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? CONTACT_EMAIL).trim()
 
 export const CONTACT = {
