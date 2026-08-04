@@ -53,7 +53,7 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/80 bg-white shadow-sm">
       <div className="max-w-7xl mx-auto pl-5 pr-4 md:pl-12 md:pr-10">
         <div className={cn('flex w-full items-center', HEADER_HEIGHT_CLASS)}>
-          <Link href="/" className="relative z-10 flex shrink-0 items-center py-2 md:py-2.5">
+          <Link href="/" className="relative z-10 flex h-full shrink-0 items-center py-1">
             <SiteLogo priority />
           </Link>
 
