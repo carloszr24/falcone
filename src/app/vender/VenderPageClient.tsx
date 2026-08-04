@@ -9,7 +9,7 @@ export function VenderPageClient() {
   const [sellContext, setSellContext] = useState({ location: '', propertyType: '' })
 
   return (
-    <div className="pt-16 md:pt-[4.5rem]">
+    <div className="pt-[3.75rem] md:pt-[4.25rem]">
       <section className="border-b border-stone-200 bg-stone-50 px-6 py-14 md:px-10 md:py-20">
         <div className="mx-auto max-w-7xl">
           <nav className="mb-6 flex items-center gap-2 text-xs font-light text-stone-400">

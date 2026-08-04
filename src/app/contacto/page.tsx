@@ -79,7 +79,7 @@ export default function ContactoPage() {
   }
 
   return (
-    <div className="pt-16 md:pt-[4.5rem]">
+    <div className="pt-[3.75rem] md:pt-[4.25rem]">
       <div className="bg-brand-burgundy text-white py-20 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           <p className="text-brand-burgundy text-[10px] tracking-[0.22em] uppercase mb-4 font-light">Contacto</p>
