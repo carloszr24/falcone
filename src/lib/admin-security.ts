@@ -128,6 +128,17 @@ export function isAdminAuthConfigured(): boolean {
   )
 }
 
+/**
+ * Temporary bypass: password/PIN/session checks are off unless explicitly re-enabled.
+ * Set ADMIN_AUTH_DISABLED=false to restore normal admin authentication.
+ */
+export function isAdminAuthDisabled(): boolean {
+  const raw = process.env.ADMIN_AUTH_DISABLED?.trim().toLowerCase()
+  if (raw === 'false' || raw === '0' || raw === 'no') return false
+  // Default: auth disabled (de momento). Explicit true/empty/unset all bypass.
+  return true
+}
+
 export function verifyAdminPassword(password: string): boolean {
   const expectedPassword = process.env.ADMIN_PASSWORD?.trim() || ''
   if (!expectedPassword) return false

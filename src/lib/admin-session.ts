@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server'
 import {
   getAdminSessionMaxAgeSeconds,
   getSessionSecret,
+  isAdminAuthDisabled,
   passwordSessionVersion,
 } from '@/lib/admin-security'
 
@@ -20,6 +21,9 @@ export function createAdminSessionToken(): string {
 }
 
 export function verifyAdminSessionToken(token: string | undefined): boolean {
+  // TEMP: skip password/PIN/session cookie checks until ADMIN_AUTH_DISABLED=false
+  if (isAdminAuthDisabled()) return true
+
   const secret = getSessionSecret()
   const version = passwordSessionVersion()
   if (!token || !secret || !version) return false
