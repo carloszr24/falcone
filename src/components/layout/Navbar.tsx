@@ -17,7 +17,7 @@ const links = [
 ]
 
 const navLinkClass =
-  'inline-flex items-center leading-none text-xs font-normal uppercase tracking-[0.1em] text-slate-600 transition-colors duration-200'
+  'inline-flex items-center leading-none text-[0.72rem] font-medium uppercase tracking-[0.14em] text-slate-600 transition-colors duration-200'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -50,20 +50,20 @@ export function Navbar() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/80 bg-white shadow-sm">
-      <div className="max-w-[1380px] mx-auto px-8 lg:px-10">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/80 bg-white/98 shadow-[0_8px_30px_rgba(15,23,42,0.04)] backdrop-blur-sm">
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-7 lg:px-10 xl:px-12">
         <div
           className={cn(
-            'flex w-full items-center',
+            'flex w-full items-center justify-between',
             HEADER_HEIGHT_CLASS
           )}
         >
-          <Link href="/" className="relative z-10 flex h-full shrink-0 items-center">
+          <Link href="/" className="relative z-10 inline-flex shrink-0 items-center py-1">
             <SiteLogo priority />
           </Link>
 
-          <div className="ml-auto hidden md:flex items-center gap-6 shrink-0 self-center lg:gap-8">
-            <nav className="flex items-center gap-6 lg:gap-8">
+          <div className="ml-8 hidden shrink-0 items-center gap-7 self-center md:flex lg:ml-10 lg:gap-9">
+            <nav className="flex items-center gap-7 lg:gap-9">
               {links.map((link) =>
                 link.href === '/sobre-nosotros' ? (
                   <div
@@ -76,7 +76,7 @@ export function Navbar() {
                       href={link.href}
                       className={cn(
                         navLinkClass,
-                        'gap-1.5',
+                        'gap-1.5 py-1',
                         pathname === link.href || servicesOpen
                           ? 'text-slate-900'
                           : 'hover:text-slate-900'
@@ -103,7 +103,7 @@ export function Navbar() {
                     </Link>
                     <div
                       className={cn(
-                        'absolute right-0 top-full z-[60] pt-3',
+                        'absolute right-0 top-full z-[60] pt-3.5',
                         servicesOpen ? 'pointer-events-auto' : 'pointer-events-none'
                       )}
                       onMouseEnter={openServices}
@@ -159,7 +159,7 @@ export function Navbar() {
 
             <ValoracionGratuitaModal
               triggerLabel="Valoración gratuita"
-              triggerClassName="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-brand-burgundy px-5 py-2 text-xs font-medium uppercase tracking-[0.1em] text-white shadow-soft transition-colors duration-200 hover:bg-brand-burgundy-dark"
+              triggerClassName="inline-flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-brand-burgundy px-[1.125rem] text-[0.69rem] font-medium uppercase tracking-[0.14em] text-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-burgundy-dark hover:shadow-lift"
             />
           </div>
 

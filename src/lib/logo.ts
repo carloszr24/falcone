@@ -7,8 +7,8 @@ export const LOGO_RENDER = {
   height: 832,
 }
 
-/** Slim header logo with breathing room above/below. */
-export const LOGO_HEADER_HEIGHT_CLASS = 'h-[1.875rem] md:h-[2.125rem]'
+/** Slim but present header logo with controlled breathing room. */
+export const LOGO_HEADER_HEIGHT_CLASS = 'h-[1.95rem] md:h-[2.25rem]'
 
 export const LOGO_FOOTER_HEIGHT_CLASS = 'h-14 md:h-16'
 
@@ -16,9 +16,9 @@ export const LOGO_IMAGE_CLASS = 'site-logo site-logo--header'
 
 export const LOGO_FOOTER_CLASS = 'site-logo site-logo--footer'
 
-/** Compact PalmaCasa-style header bar. */
-export const HEADER_HEIGHT_CLASS = 'h-[3.625rem] md:h-[4.125rem]'
+/** Refined premium header bar. */
+export const HEADER_HEIGHT_CLASS = 'h-[3.9rem] md:h-[4.35rem]'
 
-export const HEADER_OFFSET_CLASS = 'pt-[3.625rem] md:pt-[4.125rem]'
+export const HEADER_OFFSET_CLASS = 'pt-[3.9rem] md:pt-[4.35rem]'
 
 export type LogoTone = 'light' | 'dark'
