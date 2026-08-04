@@ -25,15 +25,15 @@ export const PRIMARY_SERVICES: ServiceItem[] = [
   },
 ]
 
-/** Servicios clave de Falcone (compra, valoración y marketing). */
+/** Servicios destacados de valor para compradores y vendedores. */
 export const HOME_EXTRA_SERVICES: ServiceItem[] = [
   {
     title: 'Asesoramiento',
-    desc: 'Al comprador: lo acompañamos en todo el proceso, desde la búsqueda del inmueble que desea hasta la finalización de la compra, asesorándolo en lo que necesite.',
+    desc: 'Al comprador: lo acompañaremos en todo el proceso, desde la búsqueda del inmueble que desea hasta la finalización de la compra, siempre asesorándolo en lo que necesite.',
   },
   {
     title: 'Propuesta de valor',
-    desc: 'La experiencia de las últimas operaciones realizadas y propiedades ofrecidas en la zona dan como resultado el valor estimado para su propiedad, así como las distintas posibilidades de ofrecimiento o usos posibles.',
+    desc: 'La experiencia de las últimas operaciones realizadas y propiedades ofrecidas en la zona darán como resultado el valor estimado para su propiedad, así como las distintas posibilidades de ofrecimiento o usos posibles.',
   },
   {
     title: 'Tasación e informe',
@@ -41,7 +41,7 @@ export const HOME_EXTRA_SERVICES: ServiceItem[] = [
   },
   {
     title: 'Comunicación y marketing',
-    desc: 'Para un servicio diferenciado, en marketing y comunicación contamos con las últimas herramientas tecnológicas, de diseño y difusión: websites, redes sociales y portales.',
+    desc: 'Para brindar un servicio diferenciado a nuestros clientes, en el área de marketing y comunicación contamos con las últimas herramientas tecnológicas, de diseño y difusión disponibles en el mercado: websites, redes sociales y portales.',
   },
 ]
 

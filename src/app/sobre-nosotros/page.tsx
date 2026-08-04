@@ -232,7 +232,7 @@ export default function SobreNosotrosPage() {
               añadiendo poco a poco.
             </p>
 
-            <ul className="mt-12 grid grid-cols-2 gap-10 md:grid-cols-4 md:gap-8">
+            <ul className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 md:max-w-md">
               {TEAM_MEMBERS.map((member) => (
                 <li key={member.id} className="text-center">
                   <TeamAvatar name={member.name} initials={member.initials} photo={member.photo} />

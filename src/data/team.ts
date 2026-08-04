@@ -8,20 +8,19 @@ export type TeamMember = {
   photo?: string | null
 }
 
-/** Placeholders listos para sustituir `photo` cuando tenga las imágenes del equipo. */
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: 'equipo-falcone',
-    name: 'Equipo Falcone',
-    role: 'Asesoría inmobiliaria',
+    id: 'andres-falcone',
+    name: 'Andrés Falcone',
+    role: 'Director',
     tenure: null,
-    initials: 'FP',
+    initials: 'AF',
     photo: null,
   },
 ]
 
 export const TEAM_QUOTE = {
   text: 'Conocemos Tarifa y su entorno. Escuchamos primero, informamos con claridad y acompañamos cada paso de la compraventa.',
-  attribution: 'Falcone Propiedades',
-  role: 'Tarifa',
+  attribution: 'Andrés Falcone',
+  role: 'Director',
 } as const
