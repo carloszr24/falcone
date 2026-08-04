@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
   HOME_EXTRA_SERVICES,
-  PARTNER_SERVICES,
   PRIMARY_SERVICES,
   type ServiceItem,
 } from '@/data/services'
@@ -143,24 +142,23 @@ export default function SobreNosotrosPage() {
 
             <div className="lg:pt-4">
               <h2 className="font-display text-2xl font-light leading-snug text-stone-900 md:text-3xl">
-                Experiencia, cercanía y un trato personalizado en cada operación
+                Sobre nosotros
               </h2>
               <div className="mt-6 space-y-5 text-sm font-light leading-relaxed text-stone-600 md:text-base">
                 <p>
-                  Esta inmobiliaria nace con una idea sencilla: que comprar, vender o alquilar una vivienda no
-                  debería ser un proceso frío ni apresurado. Creemos en un enfoque humano, pausado y
-                  transparente, en el que usted entienda cada paso y se sienta acompañado en todo momento.
+                  Una tradición familiar que se ha transmitido de generación en generación, cimentada en
+                  valores profundos y en un genuino compromiso con las personas. Desde nuestros inicios,
+                  hemos entendido que el patrimonio inmobiliario no solo representa un activo material, sino
+                  también un espacio donde se construyen sueños, memorias y proyectos de vida.
                 </p>
                 <p>
-                  Sabemos que detrás de cada operación hay una decisión que afecta a su vida y a la de su
-                  familia. Por eso trabajamos con la misma dedicación en una primera consulta que en el cierre
-                  en notaría: escuchamos, informamos y actuamos con la máxima diligencia.
+                  Nuestra principal motivación es ayudar. Ya sea facilitando la compra o venta de una
+                  propiedad, asesorando en inversiones o encontrando el hogar ideal. Creemos que el verdadero
+                  valor de nuestro trabajo radica en la capacidad de comprender las inquietudes de nuestros
+                  clientes y acompañarlos en cada paso, con honestidad, dedicación y un trato cercano que
+                  refleje el espíritu de servicio que nos define.
                 </p>
-                <p>
-                  Somos un equipo especializado en el mercado residencial de Tarifa y la costa de Cádiz.
-                  Conocemos la zona, sus barrios y las particularidades de cada operación, y ponemos ese
-                  conocimiento al servicio de quien confía en nosotros.
-                </p>
+                <p>Un legado de confianza, compromiso y pasión por el sector inmobiliario.</p>
               </div>
             </div>
           </div>
@@ -193,29 +191,14 @@ export default function SobreNosotrosPage() {
           <div>
             <div className="mb-10 max-w-2xl">
               <p className="mb-3 text-[10px] font-light uppercase tracking-[0.22em] text-brand-burgundy">
-                Su garantía inmobiliaria
+                Cómo trabajamos
               </p>
               <h2 className="font-display text-2xl font-light text-stone-900 md:text-3xl">
-                Colaboradores de confianza
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {PARTNER_SERVICES.map((service) => (
-                <ServiceCard key={service.title} service={service} />
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <div className="mb-10 max-w-2xl">
-              <p className="mb-3 text-[10px] font-light uppercase tracking-[0.22em] text-brand-burgundy">
-                Servicios extra
-              </p>
-              <h2 className="font-display text-2xl font-light text-stone-900 md:text-3xl">
-                Montaje y mantenimiento de su hogar
+                Asesoramiento, valoración y marketing
               </h2>
               <p className="mt-4 text-sm font-light leading-relaxed text-stone-500">
-                También le ayudamos con soluciones prácticas para ganar confort en su vivienda.
+                Acompañamos a compradores y vendedores con un servicio completo, desde la búsqueda hasta la
+                difusión de su propiedad.
               </p>
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

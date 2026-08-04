@@ -25,39 +25,23 @@ export const PRIMARY_SERVICES: ServiceItem[] = [
   },
 ]
 
-/** Servicios con colaboradores externos. */
-export const PARTNER_SERVICES: ServiceItem[] = [
-  {
-    title: 'Cambios de titularidad',
-    desc: 'Gestión de cambios de titularidad de suministros energéticos con el respaldo de Iberdrola.',
-    partner: 'Iberdrola',
-    partnerLogo: '/images/iberdrola.webp',
-  },
-  {
-    title: 'Contratación de alarmas',
-    desc: 'Asesoramiento y contratación de sistemas de alarma para su vivienda con Securitas Direct.',
-    partner: 'Securitas Direct',
-    partnerLogo: '/images/securitas.png',
-  },
-]
-
-/** Montaje y mantenimiento del hogar. */
+/** Servicios clave de Falcone (compra, valoración y marketing). */
 export const HOME_EXTRA_SERVICES: ServiceItem[] = [
   {
-    title: 'Mamparas de baño',
-    desc: 'Instalación y asesoramiento en mamparas de baño para ganar confort y funcionalidad en su hogar.',
+    title: 'Asesoramiento',
+    desc: 'Al comprador: lo acompañamos en todo el proceso, desde la búsqueda del inmueble que desea hasta la finalización de la compra, asesorándolo en lo que necesite.',
   },
   {
-    title: 'Persianas',
-    desc: 'Suministro e instalación de persianas con acabados adaptados a las necesidades de su vivienda.',
+    title: 'Propuesta de valor',
+    desc: 'La experiencia de las últimas operaciones realizadas y propiedades ofrecidas en la zona dan como resultado el valor estimado para su propiedad, así como las distintas posibilidades de ofrecimiento o usos posibles.',
   },
   {
-    title: 'Mosquiteras',
-    desc: 'Soluciones de mosquiteras a medida para disfrutar del exterior con mayor comodidad.',
+    title: 'Tasación e informe',
+    desc: 'Al vendedor: su inmueble será valuado no solo teniendo en cuenta los parámetros tradicionales, sino también considerando su potencial.',
   },
   {
-    title: 'Otros servicios',
-    desc: 'Montaje y mantenimiento adicional del hogar. Consúltenos y le orientamos según su caso.',
+    title: 'Comunicación y marketing',
+    desc: 'Para un servicio diferenciado, en marketing y comunicación contamos con las últimas herramientas tecnológicas, de diseño y difusión: websites, redes sociales y portales.',
   },
 ]
 
@@ -67,7 +51,7 @@ export const SERVICE_ITEMS: ServiceItem[] = [
     title: 'Compra y venta',
     desc: 'Acompañamiento integral en operaciones de compraventa en Tarifa y la costa de Cádiz.',
   },
-  ...PRIMARY_SERVICES,
+  ...HOME_EXTRA_SERVICES,
   {
     title: 'Alquiler',
     desc: 'Gestión de alquileres residenciales con acompañamiento en cada fase del proceso.',
