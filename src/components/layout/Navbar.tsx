@@ -17,7 +17,7 @@ const links = [
 ]
 
 const navLinkClass =
-  'inline-flex items-center leading-none text-[0.72rem] font-medium uppercase tracking-[0.14em] text-slate-600 transition-colors duration-200'
+  'inline-flex items-center leading-none text-[0.68rem] font-medium uppercase tracking-[0.12em] text-slate-600 transition-colors duration-200'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -50,7 +50,7 @@ export function Navbar() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/80 bg-white/98 shadow-[0_8px_30px_rgba(15,23,42,0.04)] backdrop-blur-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/80 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)] backdrop-blur-sm">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-7 lg:px-10 xl:px-12">
         <div
           className={cn(
@@ -62,8 +62,8 @@ export function Navbar() {
             <SiteLogo priority />
           </Link>
 
-          <div className="ml-8 hidden shrink-0 items-center gap-7 self-center md:flex lg:ml-10 lg:gap-9">
-            <nav className="flex items-center gap-7 lg:gap-9">
+          <div className="ml-8 hidden shrink-0 items-center gap-6 self-center md:flex lg:ml-10 lg:gap-7">
+            <nav className="flex items-center gap-6 lg:gap-7">
               {links.map((link) =>
                 link.href === '/sobre-nosotros' ? (
                   <div
@@ -87,7 +87,7 @@ export function Navbar() {
                         viewBox="0 0 20 20"
                         aria-hidden="true"
                         className={cn(
-                          'h-3 w-3 shrink-0 transition-transform duration-200',
+                          'h-[0.65rem] w-[0.65rem] shrink-0 transition-transform duration-200',
                           servicesOpen && 'rotate-180'
                         )}
                       >
@@ -103,7 +103,7 @@ export function Navbar() {
                     </Link>
                     <div
                       className={cn(
-                        'absolute right-0 top-full z-[60] pt-3.5',
+                        'absolute right-0 top-full z-[60] pt-4',
                         servicesOpen ? 'pointer-events-auto' : 'pointer-events-none'
                       )}
                       onMouseEnter={openServices}
@@ -159,7 +159,7 @@ export function Navbar() {
 
             <ValoracionGratuitaModal
               triggerLabel="Valoración gratuita"
-              triggerClassName="inline-flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-brand-burgundy px-[1.125rem] text-[0.69rem] font-medium uppercase tracking-[0.14em] text-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-burgundy-dark hover:shadow-lift"
+              triggerClassName="inline-flex h-9 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-brand-burgundy px-4 text-[0.64rem] font-medium uppercase tracking-[0.12em] text-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-burgundy-dark hover:shadow-lift"
             />
           </div>
 
