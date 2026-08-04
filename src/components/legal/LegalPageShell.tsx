@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { HEADER_OFFSET_CLASS } from '@/lib/logo'
 
 type Props = {
   eyebrow: string
@@ -8,7 +9,7 @@ type Props = {
 
 export function LegalPageShell({ eyebrow, title, children }: Props) {
   return (
-    <div className="pt-[3.75rem] md:pt-[4.25rem]">
+    <div className={HEADER_OFFSET_CLASS}>
       <div className="bg-stone-950 text-white py-16 px-6 md:px-10">
         <div className="max-w-3xl mx-auto">
           <p className="text-brand-burgundy text-[10px] tracking-[0.22em] uppercase mb-4 font-light">{eyebrow}</p>

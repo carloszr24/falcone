@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { CONTACT, phoneHref, whatsappHref } from '@/lib/contact'
+import { HEADER_OFFSET_CLASS } from '@/lib/logo'
 import { getPropertyById } from '@/lib/properties-store'
 import { getExtraLabel, getPropertyExtras, propertyHasExtra } from '@/lib/property-extras'
 import { formatPrice, OPERATION_LABELS, parseImages, STATUS_BADGE_CLASSES, STATUS_LABELS, TYPE_LABELS } from '@/lib/utils'
@@ -66,7 +67,7 @@ export default async function PropertyDetailPage({
   ].filter((item) => item.value)
 
   return (
-    <div className="pt-24 md:pt-[8.5rem]">
+    <div className={HEADER_OFFSET_CLASS}>
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-6 md:px-10 pt-8 pb-4">
         <nav className="flex items-center gap-2 text-xs text-stone-400">

@@ -6,6 +6,7 @@ import {
   type ServiceItem,
 } from '@/data/services'
 import { TEAM_MEMBERS, TEAM_QUOTE } from '@/data/team'
+import { HEADER_OFFSET_CLASS } from '@/lib/logo'
 
 function BankIcon() {
   return (
@@ -104,7 +105,7 @@ function TeamAvatar({ name, initials, photo }: { name: string; initials: string;
 
 export default function SobreNosotrosPage() {
   return (
-    <div className="pt-[3.75rem] md:pt-[4.25rem]">
+    <div className={HEADER_OFFSET_CLASS}>
       <section className="border-b border-stone-200 px-6 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-7xl">
           <nav className="mb-8 flex items-center gap-2 text-xs font-light text-stone-400">

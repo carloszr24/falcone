@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { filterProperties, getPublicProperties } from '@/lib/properties-store'
 import { listProvincesFromProperties } from '@/lib/property-location'
+import { HEADER_OFFSET_CLASS } from '@/lib/logo'
 import { PropertyCard } from '@/components/properties/PropertyCard'
 import { PropertyFilters } from '@/components/properties/PropertyFilters'
 import { PropertyMapSection } from '@/components/maps/PropertyMapLoader'
@@ -32,7 +33,7 @@ export default async function PropiedadesPage({
   const mapPoints = toPropertyMapPoints(properties)
 
   return (
-    <div className="pt-[3.75rem] md:pt-[4.25rem]">
+    <div className={HEADER_OFFSET_CLASS}>
       <div className="bg-brand-burgundy text-white py-20 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           <p className="text-brand-burgundy text-[10px] tracking-[0.22em] uppercase mb-4 font-light">Propiedades</p>

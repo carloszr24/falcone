@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { HEADER_OFFSET_CLASS } from '@/lib/logo'
 import { PropertyIntentSearch } from '@/components/properties/PropertyIntentSearch'
 import { ValoracionGratuitaModal } from '@/components/home/ValoracionGratuitaModal'
 
@@ -9,7 +10,7 @@ export function VenderPageClient() {
   const [sellContext, setSellContext] = useState({ location: '', propertyType: '' })
 
   return (
-    <div className="pt-[3.75rem] md:pt-[4.25rem]">
+    <div className={HEADER_OFFSET_CLASS}>
       <section className="border-b border-stone-200 bg-stone-50 px-6 py-14 md:px-10 md:py-20">
         <div className="mx-auto max-w-7xl">
           <nav className="mb-6 flex items-center gap-2 text-xs font-light text-stone-400">

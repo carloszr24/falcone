@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import { HEADER_OFFSET_CLASS } from '@/lib/logo'
+import { cn } from '@/lib/utils'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 pt-24 md:pt-[8.5rem]">
+    <div className={cn('min-h-screen flex items-center justify-center px-6', HEADER_OFFSET_CLASS)}>
       <div className="text-center">
         <p className="font-display text-8xl font-light text-stone-200 mb-6">404</p>
         <h1 className="font-display text-3xl font-light text-stone-900 mb-4">Página no encontrada</h1>

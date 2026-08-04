@@ -17,7 +17,7 @@ const links = [
 ]
 
 const navLinkClass =
-  'inline-flex items-center leading-none text-xs font-light uppercase tracking-[0.16em] transition-colors duration-200'
+  'inline-flex items-center leading-none text-[13px] font-normal uppercase tracking-[0.14em] text-slate-600 transition-colors duration-200'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -53,12 +53,12 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/80 bg-white shadow-sm">
       <div className="max-w-7xl mx-auto pl-5 pr-4 md:pl-12 md:pr-10">
         <div className={cn('flex w-full items-center', HEADER_HEIGHT_CLASS)}>
-          <Link href="/" className="relative z-10 flex h-full shrink-0 items-center py-1">
+          <Link href="/" className="relative z-10 flex h-full shrink-0 items-center">
             <SiteLogo priority />
           </Link>
 
-          <div className="ml-auto hidden md:flex items-center gap-8 shrink-0 self-center">
-            <nav className="flex items-center gap-8">
+          <div className="ml-auto hidden md:flex items-center gap-10 shrink-0 self-center">
+            <nav className="flex items-center gap-10">
               {links.map((link) =>
                 link.href === '/sobre-nosotros' ? (
                   <div
@@ -71,10 +71,10 @@ export function Navbar() {
                       href={link.href}
                       className={cn(
                         navLinkClass,
-                        'gap-1',
+                        'gap-1.5',
                         pathname === link.href || servicesOpen
-                          ? 'text-stone-900'
-                          : 'text-stone-500 hover:text-stone-900'
+                          ? 'text-slate-900'
+                          : 'hover:text-slate-900'
                       )}
                     >
                       {link.label}
@@ -82,7 +82,7 @@ export function Navbar() {
                         viewBox="0 0 20 20"
                         aria-hidden="true"
                         className={cn(
-                          'h-3 w-3 shrink-0 transition-transform duration-200',
+                          'h-3.5 w-3.5 shrink-0 transition-transform duration-200',
                           servicesOpen && 'rotate-180'
                         )}
                       >
@@ -142,8 +142,8 @@ export function Navbar() {
                     className={cn(
                       navLinkClass,
                       pathname === link.href
-                        ? 'text-stone-900'
-                        : 'text-stone-500 hover:text-stone-900'
+                        ? 'text-slate-900'
+                        : 'hover:text-slate-900'
                     )}
                   >
                     {link.label}
@@ -154,7 +154,7 @@ export function Navbar() {
 
             <ValoracionGratuitaModal
               triggerLabel="Valoración gratuita"
-              triggerClassName="btn-primary inline-flex shrink-0 whitespace-nowrap rounded-full px-5 py-2.5 text-xs font-medium uppercase tracking-[0.12em]"
+              triggerClassName="btn-primary inline-flex shrink-0 whitespace-nowrap rounded-full px-7 py-3.5 text-sm font-medium uppercase tracking-[0.1em]"
             />
           </div>
 

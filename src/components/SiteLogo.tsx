@@ -22,7 +22,7 @@ type Props = {
 export function SiteLogo({ className, variant = 'header', priority = false }: Props) {
   const isFooter = variant === 'footer'
   const imageClass = isFooter ? LOGO_FOOTER_CLASS : LOGO_IMAGE_CLASS
-  const sizes = isFooter ? '200px' : '(max-width: 768px) 200px, 260px'
+  const sizes = isFooter ? '220px' : '(max-width: 768px) 240px, 320px'
 
   return (
     <span
