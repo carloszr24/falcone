@@ -32,7 +32,7 @@ export default async function PropiedadesPage({
   const mapPoints = toPropertyMapPoints(properties)
 
   return (
-    <div className="pt-[4.75rem] md:pt-24">
+    <div className="pt-[5.5rem] md:pt-28">
       <div className="bg-brand-burgundy text-white py-20 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           <p className="text-brand-burgundy text-[10px] tracking-[0.22em] uppercase mb-4 font-light">Propiedades</p>

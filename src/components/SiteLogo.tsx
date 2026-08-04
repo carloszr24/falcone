@@ -14,7 +14,7 @@ import { AGENT } from '@/lib/contact'
 type Props = {
   className?: string
   variant?: 'header' | 'footer'
-  /** Kept for Navbar API compatibility; logo always sits on a white plate. */
+  /** Kept for Navbar API compatibility; logo is transparent PNG on white chrome. */
   tone?: LogoTone
   priority?: boolean
 }
@@ -22,15 +22,14 @@ type Props = {
 export function SiteLogo({ className, variant = 'header', priority = false }: Props) {
   const isFooter = variant === 'footer'
   const imageClass = isFooter ? LOGO_FOOTER_CLASS : LOGO_IMAGE_CLASS
-  const sizes = isFooter ? '180px' : '(max-width: 768px) 140px, 180px'
+  const sizes = isFooter ? '200px' : '(max-width: 768px) 160px, 200px'
 
   return (
     <span
       role="img"
       aria-label={AGENT.name}
       className={cn(
-        'relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-black/5',
-        'px-2.5 py-1.5',
+        'relative inline-flex shrink-0 items-center',
         isFooter ? LOGO_FOOTER_HEIGHT_CLASS : LOGO_HEADER_HEIGHT_CLASS,
         className
       )}
@@ -43,7 +42,7 @@ export function SiteLogo({ className, variant = 'header', priority = false }: Pr
         height={LOGO_RENDER.height}
         sizes={sizes}
         priority={priority}
-        className={cn(imageClass, 'bg-white')}
+        className={imageClass}
       />
     </span>
   )

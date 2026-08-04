@@ -8,7 +8,7 @@ type Props = {
 
 export function LegalPageShell({ eyebrow, title, children }: Props) {
   return (
-    <div className="pt-[4.75rem] md:pt-24">
+    <div className="pt-[5.5rem] md:pt-28">
       <div className="bg-stone-950 text-white py-16 px-6 md:px-10">
         <div className="max-w-3xl mx-auto">
           <p className="text-brand-burgundy text-[10px] tracking-[0.22em] uppercase mb-4 font-light">{eyebrow}</p>
