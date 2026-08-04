@@ -73,7 +73,7 @@ export default async function HomePage() {
               className="text-stone-200/95 text-base sm:text-lg font-normal max-w-[min(100%,24rem)] sm:max-w-xl mx-auto mb-9 leading-relaxed text-pretty animate-fade-up"
               style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}
             >
-              Falcone Propiedades: acompañamiento cercano en compra y venta cerca del mar.
+              Falcone Propiedades: asesoramiento inmobiliario personalizado para comprar y vender con confianza.
             </p>
             <HeroActions mapPoints={mapPoints} />
           </div>
