@@ -6,7 +6,7 @@ import {
   isFeaturedFlag,
   MAX_FEATURED_ON_HOME,
 } from '@/lib/property-constants'
-import { readLocalProperties } from '@/lib/local-store.server'
+import { listProperties, getPropertyRowById } from '@/lib/properties-db.server'
 
 function matchesBedrooms(property: Property, minBedrooms: string): boolean {
   if (property.bedrooms == null) return false
@@ -45,8 +45,8 @@ function sortByDisplayOrder(properties: Property[]): Property[] {
   })
 }
 
-function localCatalog(): Property[] {
-  return sortByDisplayOrder(readLocalProperties())
+async function localCatalog(): Promise<Property[]> {
+  return sortByDisplayOrder(await listProperties())
 }
 
 export async function getAllProperties(): Promise<Property[]> {
@@ -54,11 +54,11 @@ export async function getAllProperties(): Promise<Property[]> {
 }
 
 export async function getPublicProperties(): Promise<Property[]> {
-  return localCatalog().filter((property) => !property.archived)
+  return (await localCatalog()).filter((property) => !property.archived)
 }
 
 export async function getPropertyById(id: string): Promise<Property | undefined> {
-  const property = readLocalProperties().find((p) => p.id === id)
+  const property = await getPropertyRowById(id)
   return property && !property.archived ? property : undefined
 }
 
@@ -110,7 +110,7 @@ export function filterProperties(
 }
 
 export async function getFeaturedPropertiesForHome(): Promise<Property[]> {
-  return localCatalog()
+  return (await localCatalog())
     .filter((p) => isFeaturedFlag(p.featured) && !p.archived)
     .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime())
     .slice(0, MAX_FEATURED_ON_HOME)

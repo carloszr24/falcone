@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { mkdirSync, existsSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
 import { getAdminTokenFromRequest, verifyAdminSessionToken } from '@/lib/admin-session'
 import { optimizePropertyImage } from '@/lib/optimize-image'
+import { getSupabaseAdmin, PROPERTY_IMAGES_BUCKET } from '@/lib/supabase-admin'
 
 const MAX_BYTES = 5 * 1024 * 1024
 const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp'])
@@ -13,6 +12,13 @@ function unauthorized() {
 
 function badRequest(message: string) {
   return NextResponse.json({ error: message }, { status: 400 })
+}
+
+function pathFromPublicUrl(url: string): string | null {
+  const marker = `/storage/v1/object/public/${PROPERTY_IMAGES_BUCKET}/`
+  const idx = url.indexOf(marker)
+  if (idx === -1) return null
+  return decodeURIComponent(url.slice(idx + marker.length))
 }
 
 export async function POST(request: NextRequest) {
@@ -31,15 +37,18 @@ export async function POST(request: NextRequest) {
 
   const originalBuffer = Buffer.from(await file.arrayBuffer())
   const optimized = await optimizePropertyImage(originalBuffer)
-  const dir = join(process.cwd(), 'public', 'images', 'properties', propertyId)
-  if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
 
-  const filename = `${Date.now()}.${optimized.ext}`
-  const diskPath = join(dir, filename)
-  writeFileSync(diskPath, optimized.data)
+  const path = `${propertyId}/${Date.now()}.${optimized.ext}`
+  const { error: uploadError } = await getSupabaseAdmin()
+    .storage.from(PROPERTY_IMAGES_BUCKET)
+    .upload(path, optimized.data, { contentType: optimized.contentType, upsert: false })
 
-  const publicUrl = `/images/properties/${propertyId}/${filename}`
-  return NextResponse.json({ url: publicUrl, path: publicUrl })
+  if (uploadError) {
+    return NextResponse.json({ error: `Error al subir imagen: ${uploadError.message}` }, { status: 500 })
+  }
+
+  const { data } = getSupabaseAdmin().storage.from(PROPERTY_IMAGES_BUCKET).getPublicUrl(path)
+  return NextResponse.json({ url: data.publicUrl, path: data.publicUrl })
 }
 
 export async function DELETE(request: NextRequest) {
@@ -47,8 +56,24 @@ export async function DELETE(request: NextRequest) {
     return unauthorized()
   }
 
-  return NextResponse.json(
-    { error: 'Elimine la imagen del JSON de la propiedad en data/properties.json' },
-    { status: 501 }
-  )
+  let body: { url?: unknown }
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: 'JSON inválido' }, { status: 400 })
+  }
+
+  if (typeof body.url !== 'string' || !body.url) {
+    return badRequest('Falta url')
+  }
+
+  const path = pathFromPublicUrl(body.url)
+  if (!path) return badRequest('URL no reconocida')
+
+  const { error } = await getSupabaseAdmin().storage.from(PROPERTY_IMAGES_BUCKET).remove([path])
+  if (error) {
+    return NextResponse.json({ error: `Error al borrar imagen: ${error.message}` }, { status: 500 })
+  }
+
+  return NextResponse.json({ ok: true })
 }

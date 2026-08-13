@@ -267,8 +267,18 @@ export default function AdminPage() {
     return results
   }
 
-  const deleteRemovedImages = async (_finalUrls: string[]) => {
-    // En modo local las imágenes se gestionan en public/images y data/properties.json
+  const deleteRemovedImages = async (finalUrls: string[]) => {
+    const removed = initialImageUrls.filter((url) => !finalUrls.includes(url))
+    await Promise.all(
+      removed.map((url) =>
+        fetch('/api/uploads/property-image', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ url }),
+        }).catch(() => {})
+      )
+    )
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

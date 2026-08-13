@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { getAdminTokenFromRequest, verifyAdminSessionToken } from '@/lib/admin-session'
-import { readLocalProperties, writeLocalProperties } from '@/lib/local-store.server'
+import { getPropertyRowById, setPropertyArchived } from '@/lib/properties-db.server'
 
 function unauthorized() {
   return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
@@ -23,18 +23,10 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     return NextResponse.json({ error: 'Falta archived (true/false)' }, { status: 400 })
   }
 
-  const current = readLocalProperties()
-  const existing = current.find((item) => item.id === params.id)
+  const existing = await getPropertyRowById(params.id)
   if (!existing) return NextResponse.json({ error: 'No encontrada' }, { status: 404 })
 
-  const updated = {
-    ...existing,
-    archived: body.archived,
-    featured: body.archived ? false : existing.featured,
-    updatedAt: new Date(),
-  }
-
-  writeLocalProperties(current.map((item) => (item.id === params.id ? updated : item)))
+  const updated = await setPropertyArchived(params.id, body.archived)
   revalidatePath('/')
   revalidatePath('/propiedades')
   revalidatePath(`/propiedades/${params.id}`)

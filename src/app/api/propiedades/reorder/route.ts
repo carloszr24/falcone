@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { getAdminTokenFromRequest, verifyAdminSessionToken } from '@/lib/admin-session'
-import { readLocalProperties, writeLocalProperties } from '@/lib/local-store.server'
+import { listProperties, reorderPropertyRows } from '@/lib/properties-db.server'
 
 function unauthorized() {
   return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
@@ -24,18 +24,10 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: 'Falta la lista de ids' }, { status: 400 })
   }
 
-  const current = readLocalProperties()
-  const byId = new Map(current.map((item) => [item.id, item]))
-  const reordered = ids
-    .map((id, index) => {
-      const item = byId.get(id)
-      if (!item) return null
-      return { ...item, sortOrder: index, updatedAt: new Date() }
-    })
-    .filter(Boolean)
+  const current = await listProperties()
+  const validIds = ids.filter((id) => current.some((item) => item.id === id))
 
-  const missing = current.filter((item) => !ids.includes(item.id))
-  writeLocalProperties([...(reordered as typeof current), ...missing])
+  await reorderPropertyRows(validIds)
   revalidatePath('/propiedades')
   revalidatePath('/')
   return NextResponse.json({ ok: true })

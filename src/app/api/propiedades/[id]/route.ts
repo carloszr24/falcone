@@ -3,10 +3,12 @@ import { revalidatePath } from 'next/cache'
 import { getAdminTokenFromRequest, verifyAdminSessionToken } from '@/lib/admin-session'
 import { wouldExceedFeaturedHomeLimit } from '@/lib/property-constants'
 import {
+  deletePropertyRow,
+  getPropertyRowById,
   inputToProperty,
-  readLocalProperties,
-  writeLocalProperties,
-} from '@/lib/local-store.server'
+  listProperties,
+  updatePropertyRow,
+} from '@/lib/properties-db.server'
 import { getPropertyById } from '@/lib/properties-store'
 
 function unauthorized() {
@@ -31,22 +33,22 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     return NextResponse.json({ error: 'JSON inválido' }, { status: 400 })
   }
 
-  const current = readLocalProperties()
-  const existing = current.find((item) => item.id === params.id)
+  const existing = await getPropertyRowById(params.id)
   if (!existing) return NextResponse.json({ error: 'No encontrada' }, { status: 404 })
 
   const property = inputToProperty(body, existing)
   property.id = params.id
 
+  const current = await listProperties()
   if (wouldExceedFeaturedHomeLimit(current, { wantFeatured: property.featured, editingPropertyId: params.id })) {
     return NextResponse.json({ error: 'Máximo 3 propiedades destacadas en la home' }, { status: 400 })
   }
 
-  writeLocalProperties(current.map((item) => (item.id === params.id ? property : item)))
+  const updated = await updatePropertyRow(params.id, property)
   revalidatePath('/')
   revalidatePath('/propiedades')
   revalidatePath(`/propiedades/${params.id}`)
-  return NextResponse.json(property)
+  return NextResponse.json(updated)
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
@@ -54,12 +56,10 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     return unauthorized()
   }
 
-  const current = readLocalProperties()
-  if (!current.some((item) => item.id === params.id)) {
-    return NextResponse.json({ error: 'No encontrada' }, { status: 404 })
-  }
+  const existing = await getPropertyRowById(params.id)
+  if (!existing) return NextResponse.json({ error: 'No encontrada' }, { status: 404 })
 
-  writeLocalProperties(current.filter((item) => item.id !== params.id))
+  await deletePropertyRow(params.id)
   revalidatePath('/')
   revalidatePath('/propiedades')
   revalidatePath(`/propiedades/${params.id}`)

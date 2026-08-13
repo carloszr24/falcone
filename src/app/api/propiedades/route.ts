@@ -5,11 +5,13 @@ import {
   wouldExceedFeaturedHomeLimit,
 } from '@/lib/property-constants'
 import {
+  countProperties,
   inputToProperty,
-  readLocalProperties,
+  insertProperty,
+  listProperties,
+  propertyIdExists,
   slugifyPropertyId,
-  writeLocalProperties,
-} from '@/lib/local-store.server'
+} from '@/lib/properties-db.server'
 import { getAllProperties } from '@/lib/properties-store'
 
 function unauthorized() {
@@ -33,20 +35,21 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'JSON inválido' }, { status: 400 })
   }
 
-  const current = readLocalProperties()
-  const property = inputToProperty(body)
-  property.id = slugifyPropertyId(body.title)
-
-  if (current.some((item) => item.id === property.id)) {
+  const id = slugifyPropertyId(body.title)
+  if (await propertyIdExists(id)) {
     return NextResponse.json({ error: 'Ya existe una propiedad con un título similar' }, { status: 400 })
   }
+
+  const current = await listProperties()
+  const property = inputToProperty(body, undefined, await countProperties())
+  property.id = id
 
   if (wouldExceedFeaturedHomeLimit(current, { wantFeatured: property.featured, editingPropertyId: null })) {
     return NextResponse.json({ error: `Máximo ${3} propiedades destacadas en la home` }, { status: 400 })
   }
 
-  writeLocalProperties([...current, property])
+  const created = await insertProperty(property)
   revalidatePath('/')
   revalidatePath('/propiedades')
-  return NextResponse.json(property, { status: 201 })
+  return NextResponse.json(created, { status: 201 })
 }
