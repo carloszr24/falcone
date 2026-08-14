@@ -326,7 +326,7 @@ export function CalculadoraImpuestosModal({
             <div className="lead-modal-hero">
               <h3 className="lead-modal-title">Calcula impuestos y gastos de tu operación</h3>
               <p className="lead-modal-subtitle">
-                Tres calculadoras orientativas para vender o comprar en la Costa del Sol. Resultado al instante y revisión sin coste con Diego Pennise.
+                Tres calculadoras orientativas para vender o comprar en la provincia de Cádiz. Resultado al instante y revisión sin coste.
               </p>
             </div>
 
