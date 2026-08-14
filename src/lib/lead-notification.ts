@@ -42,6 +42,8 @@ function buildSubject(record: LeadNotificationPayload): string {
       return `Nuevo contacto solicitado! — ${name}`
     case 'web_valoracion':
       return `Nueva valoración gratuita solicitada! — ${name}`
+    case 'web_calculadora':
+      return `Nuevo cálculo de impuestos solicitado! — ${name}`
     default:
       return `Nuevo lead — ${name}`
   }
@@ -53,6 +55,8 @@ function buildHeadline(record: LeadNotificationPayload): string {
       return 'Nuevo contacto solicitado'
     case 'web_valoracion':
       return 'Nueva valoración gratuita solicitada'
+    case 'web_calculadora':
+      return 'Nuevo cálculo de impuestos solicitado'
     default:
       return 'Nuevo aviso en la web'
   }
@@ -64,6 +68,8 @@ function buildBadge(record: LeadNotificationPayload): { label: string; color: st
       return { label: 'Contacto', color: BRAND_BURGUNDY }
     case 'web_valoracion':
       return { label: 'Valoración gratuita', color: BRAND_BURGUNDY }
+    case 'web_calculadora':
+      return { label: 'Calculadora de impuestos', color: BRAND_BURGUNDY }
     default:
       return { label: sourceLabel(record.source), color: '#57534e' }
   }
@@ -133,12 +139,35 @@ function valoracionFields(record: LeadNotificationPayload): FieldRow[] {
   return fields
 }
 
+function calculadoraFields(record: LeadNotificationPayload): FieldRow[] {
+  const fields: FieldRow[] = [
+    { label: 'Nombre', value: record.full_name },
+    { label: 'Teléfono', value: record.phone, href: `tel:${record.phone.replace(/\s/g, '')}` },
+  ]
+
+  if (record.email) {
+    fields.push({ label: 'Email', value: record.email, href: `mailto:${record.email}` })
+  }
+
+  if (record.property_ref) {
+    fields.push({ label: 'Calculadora', value: record.property_ref })
+  }
+
+  if (record.notes) {
+    fields.push({ label: 'Resultado del cálculo', value: record.notes, multiline: true })
+  }
+
+  return fields
+}
+
 function buildFields(record: LeadNotificationPayload): FieldRow[] {
   switch (record.source) {
     case 'web_contacto':
       return contactFields(record)
     case 'web_valoracion':
       return valoracionFields(record)
+    case 'web_calculadora':
+      return calculadoraFields(record)
     default:
       return contactFields(record)
   }

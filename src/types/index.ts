@@ -45,7 +45,7 @@ export interface PropertyFilters {
   maxPrice?: number
 }
 
-export type LeadSource = 'facebook' | 'web_contacto' | 'web_valoracion' | 'whatsapp' | 'telefono' | 'otro'
+export type LeadSource = 'facebook' | 'web_contacto' | 'web_valoracion' | 'web_calculadora' | 'whatsapp' | 'telefono' | 'otro'
 
 export type LeadIntent = 'comprar' | 'vender' | 'alquilar' | 'otro'
 

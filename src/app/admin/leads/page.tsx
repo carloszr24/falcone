@@ -10,7 +10,7 @@ import {
 import { cn } from '@/lib/utils'
 import type { Lead, LeadSource, LeadStatus } from '@/types'
 
-type SourceFilter = 'all' | 'web_contacto' | 'web_valoracion'
+type SourceFilter = 'all' | 'web_contacto' | 'web_valoracion' | 'web_calculadora'
 type StatusFilter = 'all' | LeadStatus
 
 function formatDate(date: Date) {
@@ -29,6 +29,7 @@ function isToday(date: Date) {
 function sourceBadgeClass(source: LeadSource) {
   if (source === 'web_contacto') return 'bg-blue-50 text-blue-700 border-blue-100'
   if (source === 'web_valoracion') return 'bg-red-50 text-red-700 border-red-100'
+  if (source === 'web_calculadora') return 'bg-emerald-50 text-emerald-700 border-emerald-100'
   return 'bg-stone-100 text-stone-600 border-stone-200'
 }
 
@@ -40,6 +41,20 @@ function leadDetails(lead: Lead) {
   if (lead.source === 'web_valoracion') {
     const rows: { label: string; value: string }[] = []
     if (lead.saleTimeline) rows.push({ label: 'Plazo de venta', value: lead.saleTimeline })
+    if (lead.notes) {
+      for (const line of lead.notes.split('\n')) {
+        const idx = line.indexOf(':')
+        if (idx > 0) {
+          rows.push({ label: line.slice(0, idx).trim(), value: line.slice(idx + 1).trim() })
+        }
+      }
+    }
+    return rows
+  }
+
+  if (lead.source === 'web_calculadora') {
+    const rows: { label: string; value: string }[] = []
+    if (lead.propertyRef) rows.push({ label: 'Calculadora', value: lead.propertyRef })
     if (lead.notes) {
       for (const line of lead.notes.split('\n')) {
         const idx = line.indexOf(':')
@@ -194,12 +209,15 @@ export default function AdminLeadsPage() {
   }, [leads, sourceFilter, statusFilter])
 
   const stats = useMemo(() => {
-    const webLeads = leads.filter((l) => l.source === 'web_contacto' || l.source === 'web_valoracion')
+    const webLeads = leads.filter(
+      (l) => l.source === 'web_contacto' || l.source === 'web_valoracion' || l.source === 'web_calculadora'
+    )
     return {
       total: webLeads.length,
       today: webLeads.filter((l) => isToday(l.createdAt)).length,
       contacto: leads.filter((l) => l.source === 'web_contacto').length,
       valoracion: leads.filter((l) => l.source === 'web_valoracion').length,
+      calculadora: leads.filter((l) => l.source === 'web_calculadora').length,
       nuevos: webLeads.filter((l) => l.status === 'nuevo').length,
     }
   }, [leads])
@@ -259,11 +277,12 @@ export default function AdminLeadsPage() {
         </button>
       </div>
 
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <section className="grid grid-cols-2 md:grid-cols-5 gap-3">
         <StatCard label="Total web" value={String(stats.total)} />
         <StatCard label="Hoy" value={String(stats.today)} highlight={stats.today > 0} />
         <StatCard label="Contactos" value={String(stats.contacto)} />
         <StatCard label="Valoraciones" value={String(stats.valoracion)} />
+        <StatCard label="Calculadora" value={String(stats.calculadora)} />
       </section>
 
       {stats.nuevos > 0 && (
@@ -280,6 +299,7 @@ export default function AdminLeadsPage() {
               ['all', 'Todos'],
               ['web_contacto', 'Contacto'],
               ['web_valoracion', 'Valoración'],
+              ['web_calculadora', 'Calculadora'],
             ] as const).map(([value, label]) => (
               <button
                 key={value}
@@ -380,7 +400,7 @@ export default function AdminLeadsPage() {
                       )}
                     </div>
                     <p className="text-xs text-stone-400 mt-2">{formatDate(lead.createdAt)}</p>
-                    {lead.source !== 'web_contacto' && lead.source !== 'web_valoracion' && (
+                    {lead.source !== 'web_contacto' && lead.source !== 'web_valoracion' && lead.source !== 'web_calculadora' && (
                       <p className="text-xs text-stone-500 mt-1">
                         Interés: {LEAD_INTENT_LABELS[lead.intent]}
                       </p>
