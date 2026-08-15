@@ -28,14 +28,6 @@ function ScaleIcon() {
   )
 }
 
-function BankIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="h-5 w-5" aria-hidden="true">
-      <path d="M3 10h18M5 10V20M9 10V20M15 10V20M19 10V20M2 20h20M12 4l8 6H4l8-6Z" />
-    </svg>
-  )
-}
-
 function ClipboardIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="h-5 w-5" aria-hidden="true">
@@ -64,16 +56,16 @@ export default async function HomePage() {
               className="font-display text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(2rem,5.5vw+0.5rem,3.75rem)] leading-[1.14] mb-6 animate-fade-up font-light"
               style={{ opacity: 0, animationFillMode: 'forwards' }}
             >
-              Compre o venda su vivienda
+              Tu patrimonio es importante,
               <span className="hidden md:inline"> </span>
               <br className="md:hidden" aria-hidden="true" />
-              en <span className="text-sand-100 italic">Tarifa</span> con la tranquilidad que merece
+              la manera de <span className="text-sand-100 italic">venderlo</span> también
             </h1>
             <p
               className="text-stone-200/95 text-base sm:text-lg font-normal max-w-[min(100%,24rem)] sm:max-w-xl mx-auto mb-9 leading-relaxed text-pretty animate-fade-up"
               style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}
             >
-              Un servicio adaptado a las necesidades de cada cliente.
+              Valoramos su vivienda con honestidad, y le acompañamos con una estrategia de venta clara, de principio a fin.
             </p>
             <HeroActions mapPoints={mapPoints} />
           </div>
@@ -92,7 +84,7 @@ export default async function HomePage() {
               Nuestra oficina se encuentra en Tarifa, Cádiz.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 icon: HomeIcon,
@@ -103,11 +95,6 @@ export default async function HomePage() {
                 icon: ScaleIcon,
                 title: 'Asesoramiento jurídico',
                 desc: 'Orientación en documentación, trámites y formalización con la máxima diligencia.',
-              },
-              {
-                icon: BankIcon,
-                title: 'Financiación a su medida',
-                desc: 'Estudio personalizado de las opciones más adecuadas para su operación.',
               },
               {
                 icon: ClipboardIcon,
