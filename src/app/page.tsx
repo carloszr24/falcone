@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { getFeaturedPropertiesForHome, getPublicProperties } from '@/lib/properties-store'
-import { toPropertyMapPoints } from '@/lib/property-map'
+import { getFeaturedPropertiesForHome } from '@/lib/properties-store'
 import { HEADER_OFFSET_CLASS } from '@/lib/logo'
 import { cn } from '@/lib/utils'
 import { FeaturedPropertiesGrid } from '@/components/home/FeaturedPropertiesGrid'
@@ -40,7 +39,6 @@ function ClipboardIcon() {
 
 export default async function HomePage() {
   const featured = await getFeaturedPropertiesForHome()
-  const mapPoints = toPropertyMapPoints(await getPublicProperties())
 
   return (
     <>
@@ -50,10 +48,10 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-stone-900/40 via-brand-burgundy-dark/30 to-stone-950/55" />
         </div>
 
-        <div className="relative z-10 flex flex-1 w-full items-center justify-center px-4 min-[400px]:px-6 -translate-y-8 md:-translate-y-4">
+        <div className="relative z-10 flex flex-1 w-full items-center justify-center px-4 min-[400px]:px-6 translate-y-4 md:translate-y-10">
           <div className="text-center max-w-4xl mx-auto w-full">
             <h1
-              className="font-display text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(2rem,5.5vw+0.5rem,3.75rem)] leading-[1.14] mb-6 animate-fade-up font-light"
+              className="font-display text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(2.5rem,7vw+0.5rem,5rem)] leading-[1.1] mb-6 animate-fade-up font-light"
               style={{ opacity: 0, animationFillMode: 'forwards' }}
             >
               Tu patrimonio es importante,
@@ -67,7 +65,7 @@ export default async function HomePage() {
             >
               Valoramos su vivienda con honestidad, y le acompañamos con una estrategia de venta clara, de principio a fin.
             </p>
-            <HeroActions mapPoints={mapPoints} />
+            <HeroActions />
           </div>
         </div>
 

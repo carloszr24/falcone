@@ -8,14 +8,6 @@ import {
 import { TEAM_MEMBERS, TEAM_QUOTE } from '@/data/team'
 import { HEADER_OFFSET_CLASS } from '@/lib/logo'
 
-function BankIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="h-5 w-5" aria-hidden="true">
-      <path d="M3 10h18M5 10V20M9 10V20M15 10V20M19 10V20M2 20h20M12 4l8 6H4l8-6Z" />
-    </svg>
-  )
-}
-
 function ScaleIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="h-5 w-5" aria-hidden="true">
@@ -52,7 +44,7 @@ function HomeIcon() {
   )
 }
 
-const primaryIcons = [BankIcon, ScaleIcon, BoltIcon, ClipboardIcon]
+const primaryIcons = [ScaleIcon, BoltIcon, ClipboardIcon]
 const homeIcons = [HomeIcon, HomeIcon, HomeIcon, HomeIcon]
 
 function ServiceCard({
@@ -177,7 +169,7 @@ export default function SobreNosotrosPage() {
                 Servicios inmobiliarios
               </h2>
               <p className="mt-4 text-sm font-light leading-relaxed text-stone-500 md:text-base">
-                Financiación, plusvalía, suministros y asesoramiento jurídico con un trato cercano y
+                Plusvalía, suministros y asesoramiento jurídico con un trato cercano y
                 profesional.
               </p>
             </div>

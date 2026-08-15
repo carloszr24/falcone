@@ -8,10 +8,6 @@ export type ServiceItem = {
 /** Tarjetas principales — «Más que una inmobiliaria». */
 export const PRIMARY_SERVICES: ServiceItem[] = [
   {
-    title: 'Financiación 100%',
-    desc: 'Le ayudamos a estudiar y gestionar opciones de financiación adaptadas a su operación, con un acompañamiento claro en cada fase.',
-  },
-  {
     title: 'Plusvalía',
     desc: 'Asesoramiento y gestión en materia de plusvalía municipal para que conozca sus obligaciones y plazos con total transparencia.',
   },
