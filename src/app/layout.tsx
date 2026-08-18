@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Fraunces, Manrope } from 'next/font/google'
+import { Fraunces, Manrope, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
@@ -8,6 +8,12 @@ const sans = Manrope({
   subsets: ['latin'],
   variable: '--font-body',
   weight: ['400', '500', '600', '700', '800'],
+})
+
+const heading = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-heading',
+  weight: ['700', '800'],
 })
 
 const display = Fraunces({
@@ -30,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={`${sans.variable} ${display.variable}`}>
+    <html lang="es" className={`${sans.variable} ${heading.variable} ${display.variable}`}>
       <body className="bg-sand-50 text-ink antialiased">
         <Navbar />
         <main className="min-h-screen">{children}</main>

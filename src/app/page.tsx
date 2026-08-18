@@ -57,7 +57,7 @@ export default async function HomePage() {
               Algeciras · Tarifa · Campo de Gibraltar
             </span>
             <h1
-              className="font-sans font-extrabold text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(28px,6vw,46px)] leading-[1.05] tracking-tight mb-6 animate-fade-up"
+              className="font-display font-extrabold text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(28px,6vw,46px)] leading-[1.05] tracking-tight mb-6 animate-fade-up"
               style={{ opacity: 0, animationFillMode: 'forwards' }}
             >
               Tu patrimonio es importante,
