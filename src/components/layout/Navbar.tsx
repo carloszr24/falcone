@@ -160,12 +160,12 @@ export function Navbar() {
 
             <CalculadoraImpuestosModal
               triggerLabel="Calcula tus impuestos"
-              triggerClassName="inline-flex h-9 shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-brand-burgundy px-4 text-[0.64rem] font-medium uppercase tracking-[0.12em] text-brand-burgundy transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-burgundy hover:text-white"
+              triggerClassName="inline-flex h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-brand-burgundy px-5 font-display text-xs font-extrabold uppercase tracking-[0.1em] text-brand-burgundy transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-burgundy hover:text-white"
             />
 
             <ValoracionGratuitaModal
               triggerLabel="Valoración gratuita"
-              triggerClassName="inline-flex h-9 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-brand-burgundy px-4 text-[0.64rem] font-medium uppercase tracking-[0.12em] text-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-burgundy-dark hover:shadow-lift"
+              triggerClassName="inline-flex h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-brand-burgundy px-5 font-display text-xs font-extrabold uppercase tracking-[0.1em] text-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-burgundy-dark hover:shadow-lift"
             />
           </div>
 
