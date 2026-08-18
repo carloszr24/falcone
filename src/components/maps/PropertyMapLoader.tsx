@@ -22,7 +22,7 @@ export function PropertyMapSection({ points, className, title = 'Mapa' }: Props)
     <section className={cn('space-y-5', className)}>
       <div className="border-b border-stone-200 pb-4">
         <p className="text-[10px] uppercase tracking-[0.22em] text-brand-burgundy font-light mb-2">Ubicación</p>
-        <h2 className="font-display text-2xl md:text-3xl font-extrabold text-stone-900">{title}</h2>
+        <h2 className="font-display text-[20px] md:text-[24px] font-extrabold text-stone-900">{title}</h2>
         <p className="mt-2 text-sm font-light text-stone-500">
           {points.length === 1
             ? 'Consulte la ubicación exacta de la propiedad'

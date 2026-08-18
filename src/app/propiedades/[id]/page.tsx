@@ -87,20 +87,20 @@ export default async function PropertyDetailPage({
 
             <div className="lg:hidden bg-stone-900 p-6 mb-6">
               <p className="text-xs text-stone-400 tracking-widest uppercase mb-1">Precio</p>
-              <p className="font-display text-4xl font-extrabold text-white">
+              <p className="font-display text-[28px] md:text-[32px] font-extrabold text-white">
                 {formatPrice(property.price, property.operation)}
               </p>
             </div>
 
             {/* Description */}
             <div className="mt-8">
-              <h2 className="font-display text-2xl font-extrabold text-stone-900 mb-4">Descripción</h2>
+              <h2 className="font-display text-[20px] md:text-[24px] font-extrabold text-stone-900 mb-4">Descripción</h2>
               <p className="text-stone-600 leading-relaxed text-sm">{property.description}</p>
             </div>
 
             {featureItems.length > 0 && (
               <div className="mt-10">
-                <h2 className="font-display text-2xl font-extrabold text-stone-900 mb-4">Características</h2>
+                <h2 className="font-display text-[20px] md:text-[24px] font-extrabold text-stone-900 mb-4">Características</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {featureItems.map((item) => (
                     <div key={item.label} className="border border-stone-100 p-4">
@@ -138,7 +138,7 @@ export default async function PropertyDetailPage({
                 </span>
               </div>
 
-              <h1 className="font-display text-3xl font-extrabold text-stone-900 leading-tight mb-2">
+              <h1 className="font-display text-[20px] md:text-[24px] font-extrabold text-stone-900 leading-tight mb-2">
                 {property.title}
               </h1>
 
@@ -149,7 +149,7 @@ export default async function PropertyDetailPage({
               {/* Price */}
               <div className="hidden lg:block bg-stone-900 p-6 mb-6">
                 <p className="text-xs text-stone-400 tracking-widest uppercase mb-1">Precio</p>
-                <p className="font-display text-4xl font-extrabold text-white">
+                <p className="font-display text-[28px] md:text-[32px] font-extrabold text-white">
                   {formatPrice(property.price, property.operation)}
                 </p>
               </div>

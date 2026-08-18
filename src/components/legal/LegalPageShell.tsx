@@ -13,7 +13,7 @@ export function LegalPageShell({ eyebrow, title, children }: Props) {
       <div className="bg-stone-950 text-white py-16 px-6 md:px-10">
         <div className="max-w-3xl mx-auto">
           <p className="text-brand-burgundy text-[10px] tracking-[0.22em] uppercase mb-4 font-light">{eyebrow}</p>
-          <h1 className="font-display text-4xl md:text-5xl font-extrabold">{title}</h1>
+          <h1 className="font-display text-[26px] md:text-[40px] font-extrabold">{title}</h1>
         </div>
       </div>
 

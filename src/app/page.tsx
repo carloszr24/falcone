@@ -57,7 +57,7 @@ export default async function HomePage() {
               Algeciras · Tarifa · Campo de Gibraltar
             </span>
             <h1
-              className="font-sans font-extrabold text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(2.5rem,7vw+0.5rem,5rem)] leading-[1.05] tracking-tight mb-6 animate-fade-up"
+              className="font-sans font-extrabold text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(28px,6vw,46px)] leading-[1.05] tracking-tight mb-6 animate-fade-up"
               style={{ opacity: 0, animationFillMode: 'forwards' }}
             >
               Tu patrimonio es importante,
@@ -66,7 +66,7 @@ export default async function HomePage() {
               la manera de <span className="text-sand-100">venderlo</span> también
             </h1>
             <p
-              className="text-stone-200/95 text-base sm:text-lg font-normal max-w-[min(100%,24rem)] sm:max-w-xl mx-auto mb-9 leading-relaxed text-pretty animate-fade-up"
+              className="text-stone-200/95 text-[16px] font-normal max-w-[min(100%,24rem)] sm:max-w-xl mx-auto mb-9 leading-relaxed text-pretty animate-fade-up"
               style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}
             >
               Valoramos su vivienda con honestidad, y le acompañamos con una estrategia de venta clara, de principio a fin.
@@ -81,7 +81,7 @@ export default async function HomePage() {
       <section className="bg-brand-burgundy py-20 md:py-24 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 text-center">
-            <h2 className="font-display text-3xl text-white md:text-[2.35rem] font-extrabold leading-snug">
+            <h2 className="font-display text-[26px] text-white md:text-[40px] font-extrabold leading-snug">
               Todo lo que necesita para operar con confianza
             </h2>
             <p className="mt-4 text-sm text-stone-200/80 max-w-2xl mx-auto leading-relaxed font-light">
@@ -110,7 +110,7 @@ export default async function HomePage() {
                 <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/20 text-white/90">
                   <item.icon />
                 </span>
-                <h3 className="mb-2 font-display text-lg font-extrabold text-white">{item.title}</h3>
+                <h3 className="mb-2 font-display text-[16px] md:text-[18px] font-extrabold text-white">{item.title}</h3>
                 <p className="text-sm leading-relaxed text-stone-200/85 font-light">{item.desc}</p>
               </div>
             ))}
@@ -122,8 +122,8 @@ export default async function HomePage() {
         {featured.length > 0 ? (
           <div className="space-y-7">
             <div className="relative min-h-10">
-              <h2 className="font-display text-4xl md:text-5xl leading-tight text-center font-extrabold">
-                Nuevas <span className="text-brand-burgundy italic">oportunidades</span>
+              <h2 className="font-display text-[26px] md:text-[40px] leading-tight text-center font-extrabold">
+                Nuevas <span className="text-brand-burgundy">oportunidades</span>
               </h2>
               <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2">
                 <Link href="/propiedades" className="btn-outline text-[10px] shrink-0">
@@ -147,7 +147,7 @@ export default async function HomePage() {
 
       <section className="bg-gradient-to-r from-brand-burgundy-dark via-brand-burgundy to-brand-burgundy-light py-24 px-6 md:px-10 text-center">
         <div className="max-w-2xl mx-auto rounded-xl border border-white/20 bg-black/5 px-6 py-10 md:px-10 md:py-12 flex flex-col items-center text-center">
-          <h2 className="mb-5 font-display text-4xl font-extrabold leading-tight text-white md:text-[2.75rem] text-center w-full">
+          <h2 className="mb-5 font-display text-[20px] md:text-[22px] font-extrabold leading-tight text-white text-center w-full">
             ¿Desea encontrar<br />su próximo hogar?
           </h2>
           <p className="mb-10 text-base font-light leading-relaxed text-stone-100/90 text-center w-full max-w-lg mx-auto">

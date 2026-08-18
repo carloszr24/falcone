@@ -21,7 +21,7 @@ export default async function ComprarPage() {
             <span>/</span>
             <span className="text-stone-600">Deseo comprar</span>
           </nav>
-          <h1 className="font-display text-4xl font-extrabold text-stone-900 md:text-5xl">
+          <h1 className="font-display text-[26px] font-extrabold text-stone-900 md:text-[40px]">
             Encuentre su próximo hogar
           </h1>
           <p className="mt-4 max-w-2xl text-base font-light leading-relaxed text-stone-500">

@@ -84,7 +84,7 @@ export default function ContactoPage() {
       <div className="bg-brand-burgundy text-white py-20 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           <p className="text-brand-burgundy text-[10px] tracking-[0.22em] uppercase mb-4 font-light">Contacto</p>
-          <h1 className="font-display text-4xl md:text-5xl font-extrabold">Estamos a su disposición</h1>
+          <h1 className="font-display text-[26px] md:text-[40px] font-extrabold">Estamos a su disposición</h1>
           <p className="text-stone-400 mt-4 text-lg font-light max-w-md">
             Escríbanos o llámenos. Le responderemos en menos de 24 horas.
           </p>
@@ -110,7 +110,7 @@ export default function ContactoPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
-                <h2 className="font-display text-3xl font-extrabold text-stone-900 mb-8">Envíanos un mensaje</h2>
+                <h2 className="font-display text-[20px] md:text-[24px] font-extrabold text-stone-900 mb-8">Envíanos un mensaje</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
@@ -186,7 +186,7 @@ export default function ContactoPage() {
 
           <div className="lg:col-span-2 space-y-10">
             <div>
-              <h2 className="font-display text-3xl font-extrabold text-stone-900 mb-8">Información</h2>
+              <h2 className="font-display text-[20px] md:text-[24px] font-extrabold text-stone-900 mb-8">Información</h2>
               <div className="space-y-6">
                 <div className="flex gap-4">
                   <span className="shrink-0 text-stone-500"><PhoneIcon /></span>
