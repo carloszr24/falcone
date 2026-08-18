@@ -71,7 +71,7 @@ function ServiceCard({
           <Icon />
         </span>
       ) : null}
-      <h3 className="mb-3 font-display text-xl font-light text-stone-900 transition-colors group-hover:text-brand-burgundy">
+      <h3 className="mb-3 font-display text-xl font-extrabold text-stone-900 transition-colors group-hover:text-brand-burgundy">
         {service.title}
       </h3>
       <p className="text-sm font-light leading-relaxed text-stone-500">{service.desc}</p>
@@ -109,7 +109,7 @@ export default function SobreNosotrosPage() {
           </nav>
 
           <div className="max-w-3xl">
-            <h1 className="font-display text-4xl font-light leading-tight text-stone-900 md:text-5xl lg:text-6xl">
+            <h1 className="font-display text-3xl font-extrabold leading-tight text-stone-900 md:text-4xl lg:text-5xl">
               Una inmobiliaria construida sobre la confianza
             </h1>
             <p className="mt-6 text-base font-light leading-relaxed text-stone-500 md:text-lg">
@@ -134,7 +134,7 @@ export default function SobreNosotrosPage() {
             </div>
 
             <div className="lg:pt-4">
-              <h2 className="font-display text-2xl font-light leading-snug text-stone-900 md:text-3xl">
+              <h2 className="font-display text-2xl font-extrabold leading-snug text-stone-900 md:text-3xl">
                 Sobre nosotros
               </h2>
               <div className="mt-6 space-y-5 text-sm font-light leading-relaxed text-stone-600 md:text-base">
@@ -165,7 +165,7 @@ export default function SobreNosotrosPage() {
               <p className="mb-3 text-[10px] font-light uppercase tracking-[0.22em] text-brand-burgundy">
                 Más que una inmobiliaria
               </p>
-              <h2 className="font-display text-3xl font-light text-stone-900 md:text-4xl">
+              <h2 className="font-display text-3xl font-extrabold text-stone-900 md:text-4xl">
                 Servicios inmobiliarios
               </h2>
               <p className="mt-4 text-sm font-light leading-relaxed text-stone-500 md:text-base">
@@ -186,7 +186,7 @@ export default function SobreNosotrosPage() {
               <p className="mb-3 text-[10px] font-light uppercase tracking-[0.22em] text-brand-burgundy">
                 Cómo trabajamos
               </p>
-              <h2 className="font-display text-2xl font-light text-stone-900 md:text-3xl">
+              <h2 className="font-display text-2xl font-extrabold text-stone-900 md:text-3xl">
                 Asesoramiento, valoración y marketing
               </h2>
               <p className="mt-4 text-sm font-light leading-relaxed text-stone-500">
@@ -217,7 +217,7 @@ export default function SobreNosotrosPage() {
 
           <div className="mt-20">
             <p className="mb-3 text-[10px] font-light uppercase tracking-[0.22em] text-brand-burgundy">El equipo</p>
-            <h2 className="font-display text-3xl font-light text-stone-900 md:text-4xl">
+            <h2 className="font-display text-3xl font-extrabold text-stone-900 md:text-4xl">
               Comprometidos a darle la solución que busca
             </h2>
             <p className="mt-4 max-w-2xl text-sm font-light leading-relaxed text-stone-500 md:text-base">
@@ -229,7 +229,7 @@ export default function SobreNosotrosPage() {
               {TEAM_MEMBERS.map((member) => (
                 <li key={member.id} className="text-center">
                   <TeamAvatar name={member.name} initials={member.initials} photo={member.photo} />
-                  <p className="mt-5 font-display text-lg font-light text-stone-900">{member.name}</p>
+                  <p className="mt-5 font-display text-lg font-extrabold text-stone-900">{member.name}</p>
                   <p className="mt-1 text-sm font-light text-stone-500">{member.role}</p>
                   {member.tenure && (
                     <p className="mt-1 text-xs font-light text-stone-400">{member.tenure}</p>
@@ -241,7 +241,7 @@ export default function SobreNosotrosPage() {
 
           <div className="mt-20 flex flex-col items-start justify-between gap-6 border border-stone-200 bg-white p-8 md:flex-row md:items-center md:p-10">
             <div>
-              <h3 className="font-display text-2xl font-light text-stone-900">¿Hablamos?</h3>
+              <h3 className="font-display text-2xl font-extrabold text-stone-900">¿Hablamos?</h3>
               <p className="mt-2 max-w-md text-sm font-light leading-relaxed text-stone-500">
                 Cuéntenos qué necesita y le atenderemos.
               </p>

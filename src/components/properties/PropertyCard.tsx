@@ -57,7 +57,7 @@ export function PropertyCard({ property, variant = 'default', priority = false }
 
         {!isFeaturedMinimal && (
           <div className="md:hidden border-b border-stone-100 px-4 py-3">
-            <span className="font-display text-2xl font-medium text-stone-900">
+            <span className="font-display text-2xl font-extrabold text-stone-900">
               {formatPrice(property.price, property.operation)}
             </span>
           </div>
@@ -106,7 +106,7 @@ export function PropertyCard({ property, variant = 'default', priority = false }
               isFeaturedMinimal ? 'pt-0' : 'hidden md:flex'
             )}
           >
-            <span className="font-display text-2xl font-medium text-stone-900">
+            <span className="font-display text-2xl font-extrabold text-stone-900">
               {formatPrice(property.price, property.operation)}
             </span>
             {!isFeaturedMinimal && (

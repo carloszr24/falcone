@@ -149,7 +149,7 @@ export function ReviewsCarousel() {
                   idx !== 2 ? 'sm:border-r sm:border-stone-200' : ''
                 }`}
               >
-                <p className="font-display text-3xl font-light tracking-tight text-stone-900 md:text-4xl">{stat.value}</p>
+                <p className="font-display text-3xl font-extrabold tracking-tight text-stone-900 md:text-4xl">{stat.value}</p>
                 <p className="mt-1.5 text-[10px] uppercase tracking-[0.16em] text-stone-500 font-light">{stat.label}</p>
               </div>
             ))}

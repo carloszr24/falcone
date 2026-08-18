@@ -81,7 +81,7 @@ export default async function HomePage() {
       <section className="bg-brand-burgundy py-20 md:py-24 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 text-center">
-            <h2 className="font-display text-3xl text-white md:text-[2.35rem] font-light leading-snug">
+            <h2 className="font-display text-3xl text-white md:text-[2.35rem] font-extrabold leading-snug">
               Todo lo que necesita para operar con confianza
             </h2>
             <p className="mt-4 text-sm text-stone-200/80 max-w-2xl mx-auto leading-relaxed font-light">
@@ -110,7 +110,7 @@ export default async function HomePage() {
                 <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/20 text-white/90">
                   <item.icon />
                 </span>
-                <h3 className="mb-2 font-display text-lg font-light text-white">{item.title}</h3>
+                <h3 className="mb-2 font-display text-lg font-extrabold text-white">{item.title}</h3>
                 <p className="text-sm leading-relaxed text-stone-200/85 font-light">{item.desc}</p>
               </div>
             ))}
@@ -122,7 +122,7 @@ export default async function HomePage() {
         {featured.length > 0 ? (
           <div className="space-y-7">
             <div className="relative min-h-10">
-              <h2 className="font-display text-4xl md:text-5xl leading-tight text-center font-light">
+              <h2 className="font-display text-4xl md:text-5xl leading-tight text-center font-extrabold">
                 Nuevas <span className="text-brand-burgundy italic">oportunidades</span>
               </h2>
               <div className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2">
@@ -147,7 +147,7 @@ export default async function HomePage() {
 
       <section className="bg-gradient-to-r from-brand-burgundy-dark via-brand-burgundy to-brand-burgundy-light py-24 px-6 md:px-10 text-center">
         <div className="max-w-2xl mx-auto rounded-xl border border-white/20 bg-black/5 px-6 py-10 md:px-10 md:py-12 flex flex-col items-center text-center">
-          <h2 className="mb-5 font-display text-4xl font-light leading-tight text-white md:text-[2.75rem] text-center w-full">
+          <h2 className="mb-5 font-display text-4xl font-extrabold leading-tight text-white md:text-[2.75rem] text-center w-full">
             ¿Desea encontrar<br />su próximo hogar?
           </h2>
           <p className="mb-10 text-base font-light leading-relaxed text-stone-100/90 text-center w-full max-w-lg mx-auto">
