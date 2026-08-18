@@ -8,6 +8,7 @@ import { getPropertyProvince } from '@/lib/property-location'
 import { getPropertyExtras, type PropertyExtraId } from '@/lib/property-extras'
 import { ExtrasDropdown } from '@/components/admin/ExtrasDropdown'
 import { AdminLocationPicker } from '@/components/admin/AdminLocationPicker'
+import { compressImageForUpload } from '@/lib/client-image'
 import { cn } from '@/lib/utils'
 
 type ImageItem =
@@ -223,22 +224,17 @@ export default function AdminPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const addFiles = (files: FileList | null) => {
+  const addFiles = async (files: FileList | null) => {
     if (!files || files.length === 0) return
-    const allowed = new Set(['image/jpeg', 'image/png', 'image/webp'])
-    const maxBytes = 5 * 1024 * 1024
     const next: ImageItem[] = []
     const rejected: string[] = []
     for (const f of Array.from(files)) {
-      if (!allowed.has(f.type)) {
-        rejected.push(`${f.name} (formato no admitido, usa JPG/PNG/WebP)`)
-        continue
+      try {
+        const compressed = await compressImageForUpload(f)
+        next.push({ id: crypto.randomUUID(), kind: 'new', file: compressed, previewUrl: URL.createObjectURL(compressed) })
+      } catch {
+        rejected.push(`${f.name} (no se pudo procesar esta imagen, prueba con otro archivo JPG/PNG/WebP)`)
       }
-      if (f.size > maxBytes) {
-        rejected.push(`${f.name} (${(f.size / (1024 * 1024)).toFixed(1)} MB, supera el máximo de 5 MB)`)
-        continue
-      }
-      next.push({ id: crypto.randomUUID(), kind: 'new', file: f, previewUrl: URL.createObjectURL(f) })
     }
     if (next.length) setImageItems((prev) => [...prev, ...next].slice(0, MAX_PROPERTY_IMAGES))
     setImageWarning(rejected.length ? `No se añadieron ${rejected.length} foto(s): ${rejected.join(', ')}` : null)
@@ -645,7 +641,7 @@ export default function AdminPage() {
                 <div className="border border-stone-200 p-4 space-y-3">
                   <div className="flex items-center justify-between gap-4">
                     <div className="text-xs text-stone-400">
-                      Sube hasta {MAX_PROPERTY_IMAGES} imágenes (JPG/PNG/WebP, máx. 5MB cada una). Arrastra para reordenar.
+                      Sube hasta {MAX_PROPERTY_IMAGES} imágenes (JPG/PNG/WebP). Las comprimimos automáticamente. Arrastra para reordenar.
                     </div>
                     <label className="btn-outline text-[11px] px-4 py-2 cursor-pointer">
                       + Añadir fotos

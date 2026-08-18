@@ -3,7 +3,10 @@ import { getAdminTokenFromRequest, verifyAdminSessionToken } from '@/lib/admin-s
 import { optimizePropertyImage } from '@/lib/optimize-image'
 import { getSupabaseAdmin, PROPERTY_IMAGES_BUCKET } from '@/lib/supabase-admin'
 
-const MAX_BYTES = 5 * 1024 * 1024
+// Nota: Vercel limita el body de las funciones serverless a ~4.5MB, por eso este
+// límite se queda por debajo de eso. Las imágenes ya llegan comprimidas desde el
+// navegador (ver src/lib/client-image.ts), así que en la práctica no debería activarse.
+const MAX_BYTES = 4 * 1024 * 1024
 const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp'])
 
 function unauthorized() {
@@ -33,7 +36,7 @@ export async function POST(request: NextRequest) {
   const file = form.get('file')
   if (!(file instanceof File)) return badRequest('Falta file')
   if (!ALLOWED_TYPES.has(file.type)) return badRequest('Tipo no permitido (jpg/png/webp)')
-  if (file.size > MAX_BYTES) return badRequest('La imagen supera 5MB')
+  if (file.size > MAX_BYTES) return badRequest('La imagen supera 4MB')
 
   const originalBuffer = Buffer.from(await file.arrayBuffer())
   const optimized = await optimizePropertyImage(originalBuffer)
