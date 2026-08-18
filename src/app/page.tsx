@@ -156,13 +156,13 @@ export default async function HomePage() {
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contacto"
-              className="inline-flex min-h-[3rem] items-center justify-center gap-1.5 rounded-sm border border-transparent bg-white px-10 py-3 text-xs font-light tracking-[0.06em] uppercase text-brand-burgundy hover:bg-stone-50 transition-colors duration-200"
+              className="inline-flex min-h-[3rem] items-center justify-center gap-1.5 rounded-sm border border-transparent bg-white px-10 py-3 font-display text-xs font-extrabold tracking-[0.06em] uppercase text-brand-burgundy hover:bg-stone-50 transition-colors duration-200"
             >
               Hable con nuestro equipo
             </Link>
             <Link
               href="/propiedades"
-              className="inline-flex min-h-[3rem] items-center justify-center rounded-sm border border-white/80 px-10 py-3 text-xs font-light tracking-[0.06em] uppercase text-white hover:bg-white hover:text-brand-burgundy transition-colors duration-200"
+              className="inline-flex min-h-[3rem] items-center justify-center rounded-sm border border-white/80 px-10 py-3 font-display text-xs font-extrabold tracking-[0.06em] uppercase text-white hover:bg-white hover:text-brand-burgundy transition-colors duration-200"
             >
               Ver propiedades
             </Link>

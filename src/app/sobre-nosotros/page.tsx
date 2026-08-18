@@ -248,7 +248,7 @@ export default function SobreNosotrosPage() {
             </div>
             <Link
               href="/contacto"
-              className="inline-flex shrink-0 items-center gap-2 border border-brand-burgundy px-8 py-3.5 text-[10px] font-light uppercase tracking-[0.14em] text-brand-burgundy transition-colors hover:bg-brand-burgundy hover:text-white"
+              className="inline-flex shrink-0 items-center gap-2 border border-brand-burgundy px-8 py-3.5 font-display text-[10px] font-extrabold uppercase tracking-[0.14em] text-brand-burgundy transition-colors hover:bg-brand-burgundy hover:text-white"
             >
               Escríbanos
               <span aria-hidden="true">→</span>

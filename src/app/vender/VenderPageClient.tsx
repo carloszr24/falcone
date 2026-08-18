@@ -42,7 +42,7 @@ export function VenderPageClient() {
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <ValoracionGratuitaModal
               triggerLabel="Solicitar valoración gratuita"
-              triggerClassName="btn-primary inline-flex min-h-[3rem] w-full sm:w-auto items-center justify-center border border-transparent bg-white px-8 py-3.5 text-xs font-light uppercase tracking-[0.08em] text-brand-burgundy hover:bg-stone-50"
+              triggerClassName="btn-primary inline-flex min-h-[3rem] w-full sm:w-auto items-center justify-center border border-transparent bg-white px-8 py-3.5 text-xs uppercase tracking-[0.08em] text-brand-burgundy hover:bg-stone-50"
               seedForm={{
                 location: sellContext.location,
                 propertyType: sellContext.propertyType,
@@ -50,7 +50,7 @@ export function VenderPageClient() {
             />
             <Link
               href="/propiedades"
-              className="inline-flex min-h-[3rem] w-full sm:w-auto items-center justify-center border border-white/70 px-8 py-3.5 text-xs font-light uppercase tracking-[0.08em] text-white transition-colors hover:bg-white/10"
+              className="inline-flex min-h-[3rem] w-full sm:w-auto items-center justify-center border border-white/70 px-8 py-3.5 font-display text-xs font-extrabold uppercase tracking-[0.08em] text-white transition-colors hover:bg-white/10"
             >
               Ver todas las propiedades
             </Link>
