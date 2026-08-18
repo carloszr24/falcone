@@ -50,14 +50,20 @@ export default async function HomePage() {
 
         <div className="relative z-10 flex flex-1 w-full items-center justify-center px-4 min-[400px]:px-6 translate-y-4 md:translate-y-10">
           <div className="text-center max-w-4xl mx-auto w-full">
+            <span
+              className="inline-block mb-5 rounded-full border border-white/40 bg-brand-burgundy-dark/35 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white/90 animate-fade-up"
+              style={{ opacity: 0, animationFillMode: 'forwards' }}
+            >
+              Algeciras · Tarifa · Campo de Gibraltar
+            </span>
             <h1
-              className="font-display text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(2.5rem,7vw+0.5rem,5rem)] leading-[1.1] mb-6 animate-fade-up font-light"
+              className="font-sans font-extrabold text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(2.5rem,7vw+0.5rem,5rem)] leading-[1.05] tracking-tight mb-6 animate-fade-up"
               style={{ opacity: 0, animationFillMode: 'forwards' }}
             >
               Tu patrimonio es importante,
               <span className="hidden md:inline"> </span>
               <br className="md:hidden" aria-hidden="true" />
-              la manera de <span className="text-sand-100 italic">venderlo</span> también
+              la manera de <span className="text-sand-100">venderlo</span> también
             </h1>
             <p
               className="text-stone-200/95 text-base sm:text-lg font-normal max-w-[min(100%,24rem)] sm:max-w-xl mx-auto mb-9 leading-relaxed text-pretty animate-fade-up"

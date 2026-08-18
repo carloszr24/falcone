@@ -73,6 +73,7 @@ export default function AdminPage() {
   const [form, setForm] = useState(emptyForm)
   const [imageItems, setImageItems] = useState<ImageItem[]>([])
   const [initialImageUrls, setInitialImageUrls] = useState<string[]>([])
+  const [imageWarning, setImageWarning] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
   const [archiveConfirm, setArchiveConfirm] = useState<{ id: string; action: 'archive' | 'restore' } | null>(null)
   const [featuredCapError, setFeaturedCapError] = useState<string | null>(null)
@@ -166,11 +167,16 @@ export default function AdminPage() {
     }
   }
 
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, price: e.target.value.replace(/\D/g, '') })
+  }
+
   const openCreate = () => {
     setForm(emptyForm)
     setEditingId(null)
     setImageItems([])
     setInitialImageUrls([])
+    setImageWarning(null)
     setFeaturedCapError(null)
     setSubmitError(null)
     setShowForm(true)
@@ -210,6 +216,7 @@ export default function AdminPage() {
     setEditingId(p.id)
     setInitialImageUrls(urls)
     setImageItems(urls.map((url) => ({ id: crypto.randomUUID(), kind: 'existing', url })))
+    setImageWarning(null)
     setFeaturedCapError(null)
     setSubmitError(null)
     setShowForm(true)
@@ -221,12 +228,20 @@ export default function AdminPage() {
     const allowed = new Set(['image/jpeg', 'image/png', 'image/webp'])
     const maxBytes = 5 * 1024 * 1024
     const next: ImageItem[] = []
+    const rejected: string[] = []
     for (const f of Array.from(files)) {
-      if (!allowed.has(f.type)) continue
-      if (f.size > maxBytes) continue
+      if (!allowed.has(f.type)) {
+        rejected.push(`${f.name} (formato no admitido, usa JPG/PNG/WebP)`)
+        continue
+      }
+      if (f.size > maxBytes) {
+        rejected.push(`${f.name} (${(f.size / (1024 * 1024)).toFixed(1)} MB, supera el máximo de 5 MB)`)
+        continue
+      }
       next.push({ id: crypto.randomUUID(), kind: 'new', file: f, previewUrl: URL.createObjectURL(f) })
     }
     if (next.length) setImageItems((prev) => [...prev, ...next].slice(0, MAX_PROPERTY_IMAGES))
+    setImageWarning(rejected.length ? `No se añadieron ${rejected.length} foto(s): ${rejected.join(', ')}` : null)
   }
 
   const removeItem = async (id: string) => {
@@ -529,8 +544,10 @@ export default function AdminPage() {
 
               <div>
                 <label className="text-xs text-stone-500 block mb-1.5">Precio (€) *</label>
-                <input name="price" value={form.price} onChange={handleChange} required type="number"
+                <input name="price" value={form.price} onChange={handlePriceChange} required type="text" inputMode="numeric"
+                  placeholder="Ej: 200000"
                   className="w-full border border-stone-200 px-3 py-2.5 text-sm focus:outline-none focus:border-stone-900" />
+                <p className="mt-1 text-[11px] text-stone-400">Solo números, sin puntos ni comas (ej: 200000 = 200.000 €).</p>
               </div>
 
               <div>
@@ -641,6 +658,10 @@ export default function AdminPage() {
                       />
                     </label>
                   </div>
+
+                  {imageWarning && (
+                    <p className="text-xs text-red-600 bg-red-50 border border-red-100 px-3 py-2">{imageWarning}</p>
+                  )}
 
                   {imageItems.length === 0 ? (
                     <div className="text-sm text-stone-400 py-6 text-center">
