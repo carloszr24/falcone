@@ -57,7 +57,11 @@
   }
 
   .btn-gold {
-    @apply btn-primary;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-burgundy px-8 py-4 font-display text-base font-extrabold tracking-tight text-white shadow-soft transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-burgundy-dark hover:shadow-lift active:translate-y-0;
+  }
+
+  .btn-gold::after {
+    content: '\2192';
   }
 
   .section-title {

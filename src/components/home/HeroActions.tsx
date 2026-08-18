@@ -10,7 +10,7 @@ export function HeroActions() {
     >
       <ValoracionGratuitaModal
         triggerLabel="¿Cuánto vale tu propiedad?"
-        triggerClassName="btn-gold w-full sm:w-auto min-h-[3rem] md:min-h-[3.1rem] px-10 py-3.5 text-xs md:text-sm text-center border border-transparent box-border"
+        triggerClassName="btn-gold w-full sm:w-auto text-center border border-transparent box-border"
       />
     </div>
   )
