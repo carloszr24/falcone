@@ -5,21 +5,13 @@ import {
   PRIMARY_SERVICES,
   type ServiceItem,
 } from '@/data/services'
-import { TEAM_MEMBERS, TEAM_QUOTE } from '@/data/team'
+import { TEAM_QUOTE } from '@/data/team'
 import { HEADER_OFFSET_CLASS } from '@/lib/logo'
 
 function ScaleIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="h-5 w-5" aria-hidden="true">
       <path d="M12 3v18M5 7h14M7 7l-2 6h4l-2-6M17 7l-2 6h4l-2-6" />
-    </svg>
-  )
-}
-
-function BoltIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="h-5 w-5" aria-hidden="true">
-      <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
     </svg>
   )
 }
@@ -44,7 +36,7 @@ function HomeIcon() {
   )
 }
 
-const primaryIcons = [ScaleIcon, BoltIcon, ClipboardIcon]
+const primaryIcons = [ScaleIcon, ClipboardIcon]
 const homeIcons = [HomeIcon, HomeIcon, HomeIcon, HomeIcon]
 
 function ServiceCard({
@@ -75,22 +67,6 @@ function ServiceCard({
         {service.title}
       </h3>
       <p className="text-sm font-light leading-relaxed text-stone-500">{service.desc}</p>
-    </div>
-  )
-}
-
-function TeamAvatar({ name, initials, photo }: { name: string; initials: string; photo?: string | null }) {
-  if (photo) {
-    return (
-      <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border border-stone-200 bg-stone-100">
-        <Image src={photo} alt={name} fill className="object-cover" sizes="96px" />
-      </div>
-    )
-  }
-
-  return (
-    <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-stone-200 bg-stone-100 text-xl font-light tracking-wide text-stone-500">
-      {initials}
     </div>
   )
 }
@@ -161,35 +137,14 @@ export default function SobreNosotrosPage() {
       <section className="bg-stone-50 px-6 py-20 md:px-10 md:py-24">
         <div className="mx-auto max-w-7xl space-y-20">
           <div>
-            <div className="mb-12 max-w-2xl">
-              <p className="mb-3 text-[10px] font-light uppercase tracking-[0.22em] text-brand-burgundy">
-                Más que una inmobiliaria
-              </p>
-              <h2 className="font-display text-[26px] font-extrabold text-stone-900 md:text-[40px]">
-                Servicios inmobiliarios
-              </h2>
-              <p className="mt-4 text-sm font-light leading-relaxed text-stone-500 md:text-base">
-                Plusvalía, suministros y asesoramiento jurídico con un trato cercano y
-                profesional.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {PRIMARY_SERVICES.map((service, index) => (
-                <ServiceCard key={service.title} service={service} icon={primaryIcons[index] ?? HomeIcon} />
-              ))}
-            </div>
-          </div>
-
-          <div>
             <div className="mb-10 max-w-2xl">
               <p className="mb-3 text-[10px] font-light uppercase tracking-[0.22em] text-brand-burgundy">
                 Cómo trabajamos
               </p>
-              <h2 className="font-display text-[20px] font-extrabold text-stone-900 md:text-[24px]">
+              <h2 className="font-display text-[26px] font-extrabold text-stone-900 md:text-[40px]">
                 Asesoramiento, valoración y marketing
               </h2>
-              <p className="mt-4 text-sm font-light leading-relaxed text-stone-500">
+              <p className="mt-4 text-sm font-light leading-relaxed text-stone-500 md:text-base">
                 Acompañamos a compradores y vendedores con un servicio completo, desde la búsqueda hasta la
                 difusión de su propiedad.
               </p>
@@ -200,44 +155,47 @@ export default function SobreNosotrosPage() {
               ))}
             </div>
           </div>
+
+          <div>
+            <div className="mb-12 max-w-2xl">
+              <p className="mb-3 text-[10px] font-light uppercase tracking-[0.22em] text-brand-burgundy">
+                Más que una inmobiliaria
+              </p>
+              <h2 className="font-display text-[20px] font-extrabold text-stone-900 md:text-[24px]">
+                Servicios inmobiliarios
+              </h2>
+              <p className="mt-4 text-sm font-light leading-relaxed text-stone-500">
+                Plusvalía y asesoramiento jurídico con un trato cercano y profesional.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {PRIMARY_SERVICES.map((service, index) => (
+                <ServiceCard key={service.title} service={service} icon={primaryIcons[index] ?? HomeIcon} />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="border-t border-stone-200 px-6 py-20 md:px-10 md:py-24">
         <div className="mx-auto max-w-7xl">
           <blockquote className="border border-stone-200 bg-stone-50 px-8 py-10 md:px-12 md:py-12">
-            <p className="font-display text-2xl font-light leading-relaxed text-stone-800 md:text-3xl">
-              “{TEAM_QUOTE.text}”
-            </p>
-            <footer className="mt-6 text-sm font-light text-stone-500">
-              {TEAM_QUOTE.attribution}
-              <span className="text-stone-400"> — {TEAM_QUOTE.role}</span>
-            </footer>
+            <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-center md:text-left">
+              <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-full border border-stone-200 bg-stone-100 md:h-32 md:w-32">
+                <Image src="/images/andres-falcone.jpg" alt={TEAM_QUOTE.attribution} fill className="object-cover" sizes="128px" />
+              </div>
+              <div>
+                <p className="font-display text-2xl font-light leading-relaxed text-stone-800 md:text-3xl">
+                  “{TEAM_QUOTE.text}”
+                </p>
+                <footer className="mt-6 text-sm font-light text-stone-500">
+                  {TEAM_QUOTE.attribution}
+                  <span className="text-stone-400"> — {TEAM_QUOTE.role}</span>
+                </footer>
+              </div>
+            </div>
           </blockquote>
-
-          <div className="mt-20">
-            <p className="mb-3 text-[10px] font-light uppercase tracking-[0.22em] text-brand-burgundy">El equipo</p>
-            <h2 className="font-display text-[26px] font-extrabold text-stone-900 md:text-[40px]">
-              Comprometidos a darle la solución que busca
-            </h2>
-            <p className="mt-4 max-w-2xl text-sm font-light leading-relaxed text-stone-500 md:text-base">
-              Un equipo cercano, con experiencia en el mercado local. Las fotos del equipo las iremos
-              añadiendo poco a poco.
-            </p>
-
-            <ul className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 md:max-w-md">
-              {TEAM_MEMBERS.map((member) => (
-                <li key={member.id} className="text-center">
-                  <TeamAvatar name={member.name} initials={member.initials} photo={member.photo} />
-                  <p className="mt-5 font-display text-lg font-extrabold text-stone-900">{member.name}</p>
-                  <p className="mt-1 text-sm font-light text-stone-500">{member.role}</p>
-                  {member.tenure && (
-                    <p className="mt-1 text-xs font-light text-stone-400">{member.tenure}</p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
 
           <div className="mt-20 flex flex-col items-start justify-between gap-6 border border-stone-200 bg-white p-8 md:flex-row md:items-center md:p-10">
             <div>

@@ -12,10 +12,6 @@ export const PRIMARY_SERVICES: ServiceItem[] = [
     desc: 'Asesoramiento y gestión en materia de plusvalía municipal para que conozca sus obligaciones y plazos con total transparencia.',
   },
   {
-    title: 'Cambio de titularidad de luz sin coste',
-    desc: 'Tramitamos el cambio de titularidad del suministro eléctrico sin coste adicional, para que pueda entrar en su vivienda con menos preocupaciones.',
-  },
-  {
     title: 'Asesoramiento jurídico',
     desc: 'Orientación profesional en documentación, trámites notariales y registrales, con la máxima diligencia en cada operación.',
   },

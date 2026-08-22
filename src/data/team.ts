@@ -20,7 +20,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
 ]
 
 export const TEAM_QUOTE = {
-  text: 'Conocemos Tarifa y su entorno. Escuchamos primero, informamos con claridad y acompañamos cada paso de la compraventa.',
+  text: 'Conozco muy bien el Campo de Gibraltar y su entorno. Primero escucho atentamente, informo con claridad y acompaño cada paso de la compraventa.',
   attribution: 'Andrés Falcone',
   role: 'Director',
 } as const
