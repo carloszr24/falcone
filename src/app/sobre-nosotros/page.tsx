@@ -183,7 +183,7 @@ export default function SobreNosotrosPage() {
           <blockquote className="border border-stone-200 bg-stone-50 px-8 py-10 md:px-12 md:py-12">
             <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-center md:text-left">
               <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-full border border-stone-200 bg-stone-100 md:h-32 md:w-32">
-                <Image src="/images/andres-falcone.jpg" alt={TEAM_QUOTE.attribution} fill className="object-cover object-top" sizes="128px" />
+                <Image src="/images/andres-falcone.jpg" alt={TEAM_QUOTE.attribution} fill className="object-cover object-bottom" sizes="128px" />
               </div>
               <div>
                 <p className="font-display text-2xl font-light leading-relaxed text-stone-800 md:text-3xl">
