@@ -16,7 +16,7 @@ export const REVIEWS: Review[] = [
   {
     id: 2,
     name: 'dieguiloslances',
-    text: 'Excelente experiencia en la compra de mi vivienda gracias a Andrés. Estuvo 100% pendiente y atento en todo momento, solucionando y mediando rápidamente…',
+    text: 'Excelente experiencia en la compra de mi vivienda gracias a Andrés. Estuvo 100% pendiente y atento en todo momento, solucionando y mediando rápidamente cualquier problema con los trámites y el papeleo. Su implicación marca la diferencia. Totalmente recomendado.',
     timeAgo: 'Hace 3 meses',
   },
   {

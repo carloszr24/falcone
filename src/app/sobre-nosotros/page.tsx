@@ -89,9 +89,18 @@ export default function SobreNosotrosPage() {
               Una inmobiliaria construida sobre la confianza
             </h1>
             <p className="mt-6 text-base font-light leading-relaxed text-stone-500 md:text-lg">
-              Acompañamos a familias y particulares en las decisiones más importantes de su vida. Sin prisa,
-              sin presión, con la honestidad que cada cliente merece.
+              Crecemos contigo, te acompañamos, paso a paso, a ti y a tu familia en el momento más importante
+              de su vida. Sin prisas y sin presiones, atendiendo cada detalle con la honestidad y transparencia
+              que merecen.
             </p>
+            <blockquote className="mt-8 border-l-2 border-brand-burgundy/30 pl-5">
+              <p className="font-display text-base font-light italic leading-relaxed text-stone-600 md:text-lg">
+                “Excelente experiencia en la compra de mi vivienda gracias a Andrés. Estuvo 100% pendiente y
+                atento en todo momento, solucionando y mediando rápidamente cualquier problema con los trámites
+                y el papeleo. Su implicación marca la diferencia. Totalmente recomendado.”
+              </p>
+              <footer className="mt-3 text-sm font-light text-stone-400">Reseña de Google</footer>
+            </blockquote>
           </div>
 
           <div className="my-14 h-px bg-stone-200" />
