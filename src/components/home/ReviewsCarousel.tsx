@@ -141,7 +141,7 @@ export function ReviewsCarousel() {
           <h2 className="font-display text-[26px] md:text-[40px] font-extrabold text-stone-900 mb-5">Nuestra prioridad: el cliente</h2>
           <div className="flex flex-col items-center gap-2 text-stone-700">
             <StarRow />
-            <p className="text-base md:text-lg font-light">Lo que dicen quienes ya han vendido o comprado con nosotros</p>
+            <p className="text-base md:text-lg font-light">Crecemos contigo y te acompañamos paso a paso en el momento más importante de tu vida</p>
           </div>
         </div>
 
@@ -165,7 +165,6 @@ export function ReviewsCarousel() {
                     <StarRow />
                     <p className="text-stone-600 text-sm md:text-base leading-relaxed mt-4 font-light">"{review.text}"</p>
                     <p className="mt-6 font-display text-sm font-extrabold text-stone-900">{review.name}</p>
-                    <p className="mt-0.5 text-xs font-light text-stone-400">Reseña de Google · {review.timeAgo}</p>
                   </article>
                 </div>
               ))}
