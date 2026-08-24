@@ -99,7 +99,7 @@ export default function SobreNosotrosPage() {
                 atento en todo momento, solucionando y mediando rápidamente cualquier problema con los trámites
                 y el papeleo. Su implicación marca la diferencia. Totalmente recomendado.”
               </p>
-              <footer className="mt-3 text-sm font-light text-stone-400">Reseña de Google</footer>
+              <footer className="mt-3 text-sm font-light text-stone-400">dieguiloslances <span className="text-stone-300">— Reseña de Google</span></footer>
             </blockquote>
           </div>
 
