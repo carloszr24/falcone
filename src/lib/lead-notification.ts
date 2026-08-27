@@ -20,7 +20,7 @@ export type LeadNotificationPayload = {
 }
 
 const BRAND_BURGUNDY = '#103f91'
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://falconepropiedades.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://falconepropiedades.es'
 
 function escapeHtml(value: string): string {
   return value
@@ -268,7 +268,7 @@ function buildEmailContent(record: LeadNotificationPayload) {
       </tr>
       <tr>
         <td style="background:#fafaf9;border:1px solid #e7e5e4;border-top:none;border-radius:0 0 12px 12px;padding:16px 24px;text-align:center">
-          <a href="${SITE_URL}" style="font-size:13px;color:#78716c;text-decoration:none">falconepropiedades.com</a>
+          <a href="${SITE_URL}" style="font-size:13px;color:#78716c;text-decoration:none">falconepropiedades.es</a>
         </td>
       </tr>
     </table>

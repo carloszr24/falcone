@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getPublicProperties } from '@/lib/properties-store'
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://falconepropiedades.com').replace(/\/$/, '')
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://falconepropiedades.es').replace(/\/$/, '')
 
 const STATIC_ROUTES = [
   '',

@@ -1,7 +1,7 @@
 import 'server-only'
 
 const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search'
-const USER_AGENT = 'FalconePropiedades/1.0 (https://falconepropiedades.com)'
+const USER_AGENT = 'FalconePropiedades/1.0 (https://falconepropiedades.es)'
 
 /** Área Tarifa / costa de Cádiz — prioriza resultados cercanos sin limitar solo a esta zona */
 const TARIFA_VIEWBOX = '-5.70,36.08,-5.50,35.95'
