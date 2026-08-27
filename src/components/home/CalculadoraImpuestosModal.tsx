@@ -88,7 +88,7 @@ function emailValid(email: string) {
 }
 
 function validateContact(form: ContactFields): string | null {
-  if (!form.name.trim() || !form.email.trim()) return 'Completa tu nombre y email para ver el resultado.'
+  if (!form.name.trim() || !form.email.trim()) return 'Completa tu nombre y email para enviar la solicitud.'
   if (!emailValid(form.email)) return 'Introduce un email válido.'
   if (!form.consent) return 'Debes aceptar que te contactemos con el resultado.'
   return null
@@ -299,12 +299,6 @@ export function CalculadoraImpuestosModal({
     }, setCompraSave)
   }
 
-  const saveStatusLabel = (status: SaveStatus) => {
-    if (status === 'saving') return 'Guardando tu solicitud...'
-    if (status === 'saved') return 'Datos guardados. Diego Pennise revisará tu caso.'
-    if (status === 'error') return 'No se pudo guardar tu solicitud, pero aquí tienes tu resultado.'
-    return ''
-  }
 
   return (
     <>
@@ -326,7 +320,7 @@ export function CalculadoraImpuestosModal({
             <div className="lead-modal-hero">
               <h3 className="lead-modal-title">Calcula impuestos y gastos de tu operación</h3>
               <p className="lead-modal-subtitle">
-                Tres calculadoras orientativas para vender o comprar en la provincia de Cádiz. Resultado al instante y revisión sin coste.
+                Tres calculadoras orientativas para vender o comprar en la provincia de Cádiz. Déjanos tus datos y te enviamos el resultado, sin coste.
               </p>
             </div>
 
@@ -408,26 +402,11 @@ export function CalculadoraImpuestosModal({
 
                 <div className="lead-modal-actions">
                   <button type="submit" className="btn-primary lead-modal-submit">
-                    Calcular y ver mi plusvalía
+                    Solicitar mi cálculo de plusvalía
                   </button>
                 </div>
 
-                {plusvaliaResult && (
-                  <ResultCard
-                    headline={plusvaliaResult.exento ? 'Exenta' : formatEuro(plusvaliaResult.cuotaFinal)}
-                    subtitle={
-                      plusvaliaResult.exento
-                        ? 'No hay incremento de valor del suelo: la operación está exenta.'
-                        : `Método más favorable: ${plusvaliaResult.metodoRecomendado === 'real' ? 'real' : 'objetivo'}`
-                    }
-                    rows={[
-                      { label: 'Años de tenencia', value: String(plusvaliaResult.years) },
-                      { label: 'Cuota método objetivo', value: formatEuro(plusvaliaResult.cuotaObjetiva) },
-                      { label: 'Cuota método real', value: formatEuro(plusvaliaResult.cuotaReal) },
-                    ]}
-                    saveStatus={saveStatusLabel(plusvaliaSave)}
-                  />
-                )}
+                {plusvaliaResult && <ThanksCard status={plusvaliaSave} />}
               </form>
             )}
 
@@ -495,29 +474,11 @@ export function CalculadoraImpuestosModal({
 
                 <div className="lead-modal-actions">
                   <button type="submit" className="btn-primary lead-modal-submit">
-                    Calcular y ver mi IRPF
+                    Solicitar mi cálculo de IRPF
                   </button>
                 </div>
 
-                {irpfResult && (
-                  <ResultCard
-                    headline={irpfResult.exento || irpfResult.ganancia <= 0 ? (irpfResult.ganancia <= 0 ? 'Sin ganancia' : 'Exento') : formatEuro(irpfResult.cuotaIrpf)}
-                    subtitle={
-                      irpfResult.ganancia <= 0
-                        ? 'No hay ganancia patrimonial en esta operación.'
-                        : irpfResult.exento
-                          ? 'Exenta por venta de vivienda habitual con 65 años o más.'
-                          : 'Estimado con los tramos del ahorro vigentes.'
-                    }
-                    rows={[
-                      { label: 'Ganancia patrimonial', value: formatEuro(irpfResult.ganancia) },
-                      { label: 'Valor de adquisición', value: formatEuro(irpfResult.valorAdquisicion) },
-                      { label: 'Valor de transmisión', value: formatEuro(irpfResult.valorTransmision) },
-                    ]}
-                    note="Si reinviertes el importe en tu nueva vivienda habitual en un plazo de 2 años, puedes tener derecho a exención total o parcial. Consúltanos tu caso."
-                    saveStatus={saveStatusLabel(irpfSave)}
-                  />
-                )}
+                {irpfResult && <ThanksCard status={irpfSave} />}
               </form>
             )}
 
@@ -558,27 +519,11 @@ export function CalculadoraImpuestosModal({
 
                 <div className="lead-modal-actions">
                   <button type="submit" className="btn-primary lead-modal-submit">
-                    Calcular impuestos y gastos
+                    Solicitar mis gastos de compra
                   </button>
                 </div>
 
-                {compraResult && (
-                  <ResultCard
-                    headline={formatEuro(compraResult.totalGastos)}
-                    subtitle={`Total con el precio incluido: ${formatEuro(compraResult.totalConPrecio)}`}
-                    rows={[
-                      { label: compraResult.impuestoPrincipalLabel, value: formatEuro(compraResult.impuestoPrincipal) },
-                      { label: 'Notaría (estimado)', value: formatEuro(compraResult.notaria) },
-                      { label: 'Registro (estimado)', value: formatEuro(compraResult.registro) },
-                      { label: 'Gestoría (estimado)', value: formatEuro(compraResult.gestoria) },
-                      ...(compraForm.necesitaHipoteca === 'si'
-                        ? [{ label: 'Tasación + gestoría hipoteca (estimado)', value: formatEuro(compraResult.tasacionHipoteca + compraResult.gestoriaHipoteca) }]
-                        : []),
-                    ]}
-                    note={compraForm.necesitaHipoteca === 'si' ? 'El AJD de la hipoteca lo paga el banco, no tú.' : undefined}
-                    saveStatus={saveStatusLabel(compraSave)}
-                  />
-                )}
+                {compraResult && <ThanksCard status={compraSave} />}
               </form>
             )}
 
@@ -602,7 +547,7 @@ function ContactSection<T extends ContactFields>({
 }) {
   return (
     <div className="lead-modal-section">
-      <h4>Para ver tu resultado, déjanos tus datos</h4>
+      <h4>Déjanos tus datos y te enviamos el resultado</h4>
       <div className="lead-modal-grid">
         <label>
           Nombre *
@@ -631,33 +576,36 @@ function ContactSection<T extends ContactFields>({
   )
 }
 
-function ResultCard({
-  headline,
-  subtitle,
-  rows,
-  note,
-  saveStatus,
-}: {
-  headline: string
-  subtitle: string
-  rows: { label: string; value: string }[]
-  note?: string
-  saveStatus: string
-}) {
+function ThanksCard({ status }: { status: SaveStatus }) {
+  if (status === 'saving') {
+    return (
+      <div className="lead-modal-result">
+        <p className="lead-modal-save-status">Enviando tu solicitud...</p>
+      </div>
+    )
+  }
+
+  if (status === 'error') {
+    return (
+      <div className="lead-modal-result">
+        <div className="lead-modal-result-headline">
+          <span>No hemos podido guardar tu solicitud</span>
+        </div>
+        <p className="lead-modal-result-note">
+          Prueba de nuevo en unos minutos, o llámanos directamente y te ayudamos igualmente.
+        </p>
+      </div>
+    )
+  }
+
   return (
     <div className="lead-modal-result">
       <div className="lead-modal-result-headline">
-        <span>{subtitle}</span>
-        <strong>{headline}</strong>
+        <span>¡Gracias! Hemos recibido tus datos</span>
       </div>
-      {rows.map((row) => (
-        <div className="lead-modal-result-row" key={row.label}>
-          <span>{row.label}</span>
-          <span>{row.value}</span>
-        </div>
-      ))}
-      {note && <p className="lead-modal-result-note">{note}</p>}
-      {saveStatus && <p className="lead-modal-save-status">{saveStatus}</p>}
+      <p className="lead-modal-result-note">
+        Revisaremos tu caso y nos pondremos en contacto contigo con el resultado en breve.
+      </p>
     </div>
   )
 }

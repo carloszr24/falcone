@@ -2,31 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getAdminTokenFromRequest, verifyAdminSessionToken } from '@/lib/admin-session'
 import { LEAD_INTENTS, LEAD_PRIORITIES, LEAD_SOURCES, LEAD_STATUSES, rowsToLeads, type LeadRow } from '@/lib/leads'
 import { sendLeadNotificationEmail } from '@/lib/lead-notification'
-import { appendLocalLead, readLocalLeads, writeLocalLeads } from '@/lib/local-store.server'
+import { deleteLeadRow, getLeadRowById, insertLeadRow, listLeadRows, updateLeadRow } from '@/lib/leads-db.server'
 
 function unauthorized() {
   return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
-}
-
-function toLeadRow(stored: ReturnType<typeof readLocalLeads>[number]): LeadRow {
-  return {
-    id: stored.id,
-    full_name: stored.fullName,
-    email: stored.email ?? null,
-    phone: stored.phone,
-    source: stored.source as LeadRow['source'],
-    intent: stored.intent as LeadRow['intent'],
-    status: stored.status as LeadRow['status'],
-    priority: stored.priority as LeadRow['priority'],
-    property_ref: stored.propertyRef ?? null,
-    notes: stored.notes ?? null,
-    sale_timeline: stored.saleTimeline ?? null,
-    assigned_to: stored.assignedTo ?? null,
-    first_response_at: stored.firstResponseAt ?? null,
-    last_contact_at: stored.lastContactAt ?? null,
-    created_at: stored.createdAt,
-    updated_at: stored.updatedAt,
-  }
 }
 
 export async function GET(request: NextRequest) {
@@ -34,8 +13,13 @@ export async function GET(request: NextRequest) {
     return unauthorized()
   }
 
-  const leads = readLocalLeads().map(toLeadRow)
-  return NextResponse.json(rowsToLeads(leads))
+  try {
+    const leads = await listLeadRows()
+    return NextResponse.json(rowsToLeads(leads))
+  } catch (err) {
+    console.error('[api/leads] GET error:', err)
+    return NextResponse.json({ error: 'Error al leer leads' }, { status: 500 })
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -71,20 +55,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Prioridad no válida' }, { status: 400 })
     }
 
-    const stored = appendLocalLead({
-      fullName,
+    const stored = await insertLeadRow({
+      full_name: fullName,
       phone,
       email,
       notes,
-      source,
-      intent,
-      priority,
-      propertyRef,
-      saleTimeline,
+      source: source as LeadRow['source'],
+      intent: intent as LeadRow['intent'],
+      priority: priority as LeadRow['priority'],
+      property_ref: propertyRef,
+      sale_timeline: saleTimeline,
       status: 'nuevo',
+      assigned_to: null,
+      first_response_at: null,
+      last_contact_at: null,
     })
 
-    const lead = rowsToLeads([toLeadRow(stored)])[0]
+    const lead = rowsToLeads([stored])[0]
 
     const emailResult = await sendLeadNotificationEmail({
       full_name: fullName,
@@ -109,7 +96,8 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(lead, { status: 201 })
-  } catch {
+  } catch (err) {
+    console.error('[api/leads] POST error:', err)
     return NextResponse.json({ error: 'Error al crear lead' }, { status: 500 })
   }
 }
@@ -124,21 +112,19 @@ export async function PATCH(request: NextRequest) {
     const id = String(body.id || '').trim()
     if (!id) return NextResponse.json({ error: 'ID no válido' }, { status: 400 })
 
-    const leads = readLocalLeads()
-    const index = leads.findIndex((lead) => lead.id === id)
-    if (index === -1) return NextResponse.json({ error: 'Lead no encontrado' }, { status: 404 })
+    const current = await getLeadRowById(id)
+    if (!current) return NextResponse.json({ error: 'Lead no encontrado' }, { status: 404 })
 
-    const current = leads[index]
-    const updated = { ...current, updatedAt: new Date().toISOString() }
+    const patch: Partial<LeadRow> = {}
 
     if (body.status) {
       const status = String(body.status)
       if (!LEAD_STATUSES.includes(status as (typeof LEAD_STATUSES)[number])) {
         return NextResponse.json({ error: 'Estado no válido' }, { status: 400 })
       }
-      updated.status = status
-      if (status === 'contactado' && !body.firstResponseAt) {
-        updated.firstResponseAt = new Date().toISOString()
+      patch.status = status as LeadRow['status']
+      if (status === 'contactado' && !body.firstResponseAt && !current.first_response_at) {
+        patch.first_response_at = new Date().toISOString()
       }
     }
     if (body.priority) {
@@ -146,16 +132,16 @@ export async function PATCH(request: NextRequest) {
       if (!LEAD_PRIORITIES.includes(priority as (typeof LEAD_PRIORITIES)[number])) {
         return NextResponse.json({ error: 'Prioridad no válida' }, { status: 400 })
       }
-      updated.priority = priority
+      patch.priority = priority as LeadRow['priority']
     }
-    if (body.notes !== undefined) updated.notes = String(body.notes || '').trim() || null
-    if (body.assignedTo !== undefined) updated.assignedTo = String(body.assignedTo || '').trim() || null
-    if (body.lastContactAt) updated.lastContactAt = new Date(body.lastContactAt).toISOString()
+    if (body.notes !== undefined) patch.notes = String(body.notes || '').trim() || null
+    if (body.assignedTo !== undefined) patch.assigned_to = String(body.assignedTo || '').trim() || null
+    if (body.lastContactAt) patch.last_contact_at = new Date(body.lastContactAt).toISOString()
 
-    leads[index] = updated
-    writeLocalLeads(leads)
-    return NextResponse.json(rowsToLeads([toLeadRow(updated)])[0])
-  } catch {
+    const updated = await updateLeadRow(id, patch)
+    return NextResponse.json(rowsToLeads([updated])[0])
+  } catch (err) {
+    console.error('[api/leads] PATCH error:', err)
     return NextResponse.json({ error: 'Error al actualizar lead' }, { status: 500 })
   }
 }
@@ -170,9 +156,10 @@ export async function DELETE(request: NextRequest) {
     const id = String(body.id || '').trim()
     if (!id) return NextResponse.json({ error: 'ID no válido' }, { status: 400 })
 
-    writeLocalLeads(readLocalLeads().filter((lead) => lead.id !== id))
+    await deleteLeadRow(id)
     return NextResponse.json({ ok: true })
-  } catch {
+  } catch (err) {
+    console.error('[api/leads] DELETE error:', err)
     return NextResponse.json({ error: 'Error al eliminar lead' }, { status: 500 })
   }
 }
