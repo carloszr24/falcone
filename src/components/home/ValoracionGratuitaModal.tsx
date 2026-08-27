@@ -225,7 +225,6 @@ export function ValoracionGratuitaModal({
                   <h3 className="lead-modal-title">¿Desea conocer el valor de su vivienda?</h3>
                   <p className="lead-modal-subtitle">
                     Complete los datos y le realizaremos una valoración completa de su inmueble sin compromiso.
-                    Además, si vende con nosotros, le obsequiamos el certificado energético obligatorio.
                   </p>
                 </div>
 
