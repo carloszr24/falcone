@@ -1,4 +1,4 @@
-export const CONTACT_EMAIL = 'correo@falconepropiedades.com'
+export const CONTACT_EMAIL = 'correo@falconepropiedades.es'
 
 export const AGENT = {
   name: 'Falcone Propiedades',
