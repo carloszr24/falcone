@@ -15,8 +15,18 @@ const STATIC_ROUTES = [
   '/politica-cookies',
 ]
 
+// Revalida en vez de quedar fijo para siempre en el build (las propiedades cambian).
+export const revalidate = 3600
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const properties = await getPublicProperties()
+  // Si Supabase falla o tarda (p.ej. en build), no debe tirar todo el despliegue abajo:
+  // el sitemap sale sin las fichas de propiedad en vez de romper el build.
+  let properties: Awaited<ReturnType<typeof getPublicProperties>> = []
+  try {
+    properties = await getPublicProperties()
+  } catch (err) {
+    console.error('[sitemap] No se pudieron leer las propiedades:', err)
+  }
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((route) => ({
     url: `${SITE_URL}${route}`,
