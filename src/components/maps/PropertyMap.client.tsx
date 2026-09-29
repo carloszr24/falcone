@@ -79,7 +79,6 @@ export default function PropertyMap({ points = [], className, draggable = null, 
     L.tileLayer(MAP_TILE_URL, {
       attribution: MAP_TILE_ATTRIBUTION,
       maxZoom: 19,
-      subdomains: 'abcd',
     }).addTo(map)
 
     mapRef.current = map

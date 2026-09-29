@@ -4,9 +4,10 @@ import L from 'leaflet'
 export const TARIFA_CENTER: [number, number] = [36.014, -5.604]
 export const DEFAULT_MAP_ZOOM = 14
 
-export const MAP_TILE_URL = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+// CARTO pasó a exigir API key en sus tiles (devuelve "API KEY REQUIRED"), así que usamos los tiles públicos de OSM.
+export const MAP_TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
 export const MAP_TILE_ATTRIBUTION =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://carto.com/attributions">CARTO</a>'
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
 const MARKER_SVG = `
 <svg viewBox="0 0 32 40" width="26" height="32" aria-hidden="true" focusable="false">
