@@ -52,7 +52,7 @@ export const REVIEWS: Review[] = [
   {
     id: 8,
     name: 'Juan Antonio Sales Martínez',
-    text: 'Muy buena atención, nos asesoró muy bien, nos ayudó todo lo posible, muy atentos…',
+    text: 'Muy buena atención, nos asesoró muy bien, nos ayudó todo lo posible, muy atentos. Volvería en un futuro a asesorarme en esta inmobiliaria.',
     timeAgo: 'Hace un año',
   },
   {
@@ -66,5 +66,11 @@ export const REVIEWS: Review[] = [
     name: 'Lola Rodríguez',
     text: 'Excelente profesional. Serio, muy formal y pendiente de todo el proceso de venta, desde el primer momento. Totalmente recomendable.',
     timeAgo: 'Hace 2 meses',
+  },
+  {
+    id: 11,
+    name: 'Roby c 333',
+    text: 'Andrés es de los pocos profesionales en la costa del sol que realmente está dispuesto a ayudar y hacer las cosas más fáciles desde el día 1. Quien tenga la posibilidad de tratar con él, que lo haga.',
+    timeAgo: 'Hace un mes',
   },
 ]
