@@ -55,7 +55,7 @@ export default async function HomePage() {
               className="inline-block mb-5 rounded-full border border-white/40 bg-brand-burgundy-dark/35 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white/90 animate-fade-up"
               style={{ opacity: 0, animationFillMode: 'forwards' }}
             >
-              Algeciras · Tarifa · Campo de Gibraltar
+              Tarifa · Campo de Gibraltar
             </span>
             <h1
               className="font-display font-extrabold text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.35)] text-balance text-[clamp(28px,6vw,46px)] leading-[1.05] tracking-tight mb-6 animate-fade-up"
