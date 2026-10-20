@@ -22,10 +22,24 @@ const display = Fraunces({
   weight: ['400', '500', '600'],
 })
 
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://falconepropiedades.es').replace(/\/$/, '')
+const SITE_TITLE = 'Falcone Propiedades | Inmobiliaria en Tarifa'
+const SITE_DESCRIPTION =
+  'Compra y venta de viviendas en Tarifa y Cádiz. Falcone Propiedades: trato cercano, asesoramiento claro y propiedades cerca del mar.'
+
 export const metadata: Metadata = {
-  title: 'Falcone Propiedades | Inmobiliaria en Tarifa',
-  description:
-    'Compra y venta de viviendas en Tarifa y Cádiz. Falcone Propiedades: trato cercano, asesoramiento claro y propiedades cerca del mar.',
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: 'website',
+    siteName: 'Falcone Propiedades',
+    locale: 'es_ES',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [{ url: '/api/og/default', width: 1200, height: 630, alt: 'Falcone Propiedades' }],
+  },
+  twitter: { card: 'summary_large_image', images: ['/api/og/default'] },
   keywords:
     'falcone propiedades, inmobiliaria tarifa, comprar piso tarifa, venta vivienda cadiz, playa de los lances, agencia inmobiliaria tarifa',
 }

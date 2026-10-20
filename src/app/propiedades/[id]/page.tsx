@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { CONTACT, phoneHref, whatsappHref } from '@/lib/contact'
@@ -21,6 +22,38 @@ function PhoneIcon() {
 }
 
 const statusColors = STATUS_BADGE_CLASSES
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const property = await getPropertyById(params.id)
+  if (!property) return {}
+
+  const facts = [
+    formatPrice(property.price, property.operation),
+    property.location,
+    property.sqMeters ? `${property.sqMeters} m²` : null,
+    property.bedrooms ? `${property.bedrooms} hab.` : null,
+    property.bathrooms ? `${property.bathrooms} baños` : null,
+  ].filter(Boolean)
+  const summary = property.description.replace(/\s+/g, ' ').trim().slice(0, 110)
+  const description = `${facts.join(' · ')}${summary ? ` — ${summary}…` : ''}`
+  const title = `${property.title} | Falcone Propiedades`
+  const image = { url: `/api/og/${property.id}`, width: 1200, height: 630, alt: property.title }
+
+  return {
+    title,
+    description,
+    openGraph: {
+      type: 'website',
+      siteName: 'Falcone Propiedades',
+      locale: 'es_ES',
+      url: `/propiedades/${property.id}`,
+      title,
+      description,
+      images: [image],
+    },
+    twitter: { card: 'summary_large_image', title, description, images: [image.url] },
+  }
+}
 
 export default async function PropertyDetailPage({
   params,
