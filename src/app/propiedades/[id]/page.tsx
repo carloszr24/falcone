@@ -8,6 +8,7 @@ import { getExtraLabel, getPropertyExtras, propertyHasExtra } from '@/lib/proper
 import { formatPrice, OPERATION_LABELS, parseImages, STATUS_BADGE_CLASSES, STATUS_LABELS, TYPE_LABELS } from '@/lib/utils'
 import { cn } from '@/lib/utils'
 import { PropertyImageViewer } from '@/components/properties/PropertyImageViewer'
+import { ShareButton } from '@/components/properties/ShareButton'
 import { PropertyMapSection } from '@/components/maps/PropertyMapLoader'
 import { toPropertyMapPoint } from '@/lib/property-map'
 
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const summary = property.description.replace(/\s+/g, ' ').trim().slice(0, 110)
   const description = `${facts.join(' · ')}${summary ? ` — ${summary}…` : ''}`
   const title = `${property.title} | Falcone Propiedades`
-  const image = { url: `/api/og/${property.id}`, width: 1200, height: 630, alt: property.title }
+  const image = { url: `/api/og/${property.id}`, width: 1200, height: 630, alt: property.title, type: 'image/jpeg' }
 
   return {
     title,
@@ -245,6 +246,7 @@ export default async function PropertyDetailPage({
                   <PhoneIcon />
                   +34 {CONTACT.phone.display}
                 </a>
+                <ShareButton title={property.title} text={`${property.title} · ${formatPrice(property.price, property.operation)}`} />
               </div>
             </div>
           </div>
