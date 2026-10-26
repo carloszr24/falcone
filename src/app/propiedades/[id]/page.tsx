@@ -246,7 +246,7 @@ export default async function PropertyDetailPage({
                   <PhoneIcon />
                   +34 {CONTACT.phone.display}
                 </a>
-                <ShareButton title={property.title} text={`${property.title} · ${formatPrice(property.price, property.operation)}`} />
+                <ShareButton id={property.id} title={property.title} text={`${property.title} · ${formatPrice(property.price, property.operation)}`} />
               </div>
             </div>
           </div>

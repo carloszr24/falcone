@@ -13,8 +13,37 @@ function ShareIcon() {
   )
 }
 
-export function ShareButton({ title, text }: { title: string; text: string }) {
+export function ShareButton({ id, title, text }: { id: string; title: string; text: string }) {
   const [copied, setCopied] = useState(false)
+  const [busy, setBusy] = useState(false)
+
+  // Imagen vertical 9:16 pensada para estados de WhatsApp.
+  async function handleStory() {
+    setBusy(true)
+    try {
+      const res = await fetch(`/api/story/${id}`)
+      if (!res.ok) throw new Error('story')
+      const blob = await res.blob()
+      const file = new File([blob], `${id}.png`, { type: 'image/png' })
+      if (navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title })
+          return
+        } catch (err) {
+          if ((err as Error).name === 'AbortError') return
+        }
+      }
+      const a = document.createElement('a')
+      a.href = URL.createObjectURL(blob)
+      a.download = `${id}.png`
+      a.click()
+      URL.revokeObjectURL(a.href)
+    } catch {
+      window.alert('No se pudo generar la imagen. Inténtalo de nuevo.')
+    } finally {
+      setBusy(false)
+    }
+  }
 
   async function handleShare() {
     const url = window.location.href
@@ -35,14 +64,19 @@ export function ShareButton({ title, text }: { title: string; text: string }) {
     }
   }
 
+  const cls =
+    'inline-flex w-full items-center justify-center gap-2 text-sm py-4 border border-stone-300 text-stone-700 hover:border-stone-900 hover:text-stone-900 transition-colors duration-200 disabled:opacity-60'
+
   return (
-    <button
-      type="button"
-      onClick={handleShare}
-      className="inline-flex w-full items-center justify-center gap-2 text-sm py-4 border border-stone-300 text-stone-700 hover:border-stone-900 hover:text-stone-900 transition-colors duration-200"
-    >
-      <ShareIcon />
-      {copied ? 'Enlace copiado ✓' : 'Compartir propiedad'}
-    </button>
+    <>
+      <button type="button" onClick={handleShare} className={cls}>
+        <ShareIcon />
+        {copied ? 'Enlace copiado ✓' : 'Compartir enlace'}
+      </button>
+      <button type="button" onClick={handleStory} disabled={busy} className={cls}>
+        <ShareIcon />
+        {busy ? 'Generando imagen…' : 'Imagen para estados de WhatsApp'}
+      </button>
+    </>
   )
 }
