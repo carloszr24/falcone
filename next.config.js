@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    // Tipografías y logo que leen las imágenes de vista previa (/api/og, /api/story) en tiempo de ejecución.
+    outputFileTracingIncludes: {
+      '/api/og/[id]': ['./src/assets/fonts/**', './public/images/falcone.png', './public/images/tarifa.png'],
+      '/api/story/[id]': ['./src/assets/fonts/**', './public/images/falcone.png', './public/images/tarifa.png'],
+    },
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60 * 60 * 24 * 30,

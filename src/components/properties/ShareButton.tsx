@@ -24,7 +24,7 @@ export function ShareButton({ id, title, text }: { id: string; title: string; te
       const res = await fetch(`/api/story/${id}`)
       if (!res.ok) throw new Error('story')
       const blob = await res.blob()
-      const file = new File([blob], `${id}.png`, { type: 'image/png' })
+      const file = new File([blob], `${id}.jpg`, { type: 'image/jpeg' })
       if (navigator.canShare?.({ files: [file] })) {
         try {
           await navigator.share({ files: [file], title })
@@ -35,7 +35,7 @@ export function ShareButton({ id, title, text }: { id: string; title: string; te
       }
       const a = document.createElement('a')
       a.href = URL.createObjectURL(blob)
-      a.download = `${id}.png`
+      a.download = `${id}.jpg`
       a.click()
       URL.revokeObjectURL(a.href)
     } catch {

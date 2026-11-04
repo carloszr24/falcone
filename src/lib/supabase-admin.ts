@@ -14,6 +14,8 @@ export function getSupabaseAdmin(): SupabaseClient {
 
   client = createClient(url, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
+    // Sin caché de datos de Next: los cambios del admin deben verse al instante (fichas, og, story).
+    global: { fetch: (input, init) => fetch(input, { ...init, cache: 'no-store' }) },
   })
   return client
 }

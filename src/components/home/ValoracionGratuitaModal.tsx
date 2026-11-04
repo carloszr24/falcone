@@ -63,12 +63,15 @@ type Props = {
   triggerClassName?: string
   triggerLabel?: string
   seedForm?: Partial<ValoracionForm>
+  /** Abre el formulario al cargar (enlace compartible /valoracion). */
+  autoOpen?: boolean
 }
 
 export function ValoracionGratuitaModal({
   triggerClassName = '',
   triggerLabel = 'Deseo vender',
   seedForm,
+  autoOpen = false,
 }: Props) {
   const [mounted, setMounted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -112,6 +115,11 @@ export function ValoracionGratuitaModal({
     setError('')
     setIsOpen(true)
   }
+
+  useEffect(() => {
+    if (autoOpen) openModal()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const validateCurrentStep = () => {
     setError('')

@@ -16,7 +16,7 @@ const STATIC_ROUTES = [
 ]
 
 // Revalida en vez de quedar fijo para siempre en el build (las propiedades cambian).
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Si Supabase falla o tarda (p.ej. en build), no debe tirar todo el despliegue abajo:
